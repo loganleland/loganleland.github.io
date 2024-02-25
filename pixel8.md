@@ -21,6 +21,8 @@ layout: default
 
 ## Setup Environment
 
+[The Rising Sea](https://ncatlab.org/nlab/show/The+Rising+Sea) A hard nut may be cracked not immediately by sheer punctual force, but eventually by gently immersing it into a whole body of water.
+
 George Hotz: You gotta spend time to setup your environment nice because once your environment is nice everything else is nice. 
 
 ### Setup (rootless) Phone
