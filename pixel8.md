@@ -74,6 +74,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
     Allow usb debugging on the phone. 
 
 ### Kernel
+
  The Pixel 8 has a codeword of shiba and the Pixel 8 Pro has a codeword of husky. Combining these codewords produces shusky. 
 
  
@@ -85,14 +86,17 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
   - git checkout android-gs-shusky-5.15-android14-d1
 
  #### Generic Kernel Image (GKI)
+ 
  ![gki](./images/generic-kernel-image-overview.png)
 
  Link to GKI doc: [Android GKI](https://source.android.com/docs/core/architecture/kernel/generic-kernel-image)
 
  #### Building Pixel Kernels
+ 
  This [link](https://source.android.com/docs/setup/build/building-pixel-kernels) provides step-by-step instructions on how to download, compile, and flash a custom Pixel kernel for development
 
  ### GPU
+ 
  The Pixel 8 uses Immortalis-G715
 
 - Documentation: [developer arm docs](https://developer.arm.com/Processors/Immortalis-G715#Technical-Specifications)
