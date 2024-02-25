@@ -2,6 +2,8 @@
 layout: default
 ---
 
+[leland.zip](https://leland.zip/)
+
 ## Reading List
 
 A collection of useful literature
