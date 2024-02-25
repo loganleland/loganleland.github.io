@@ -10,4 +10,4 @@ I'm a vulnerability researcher with a focus on embedded linux systems. I'm curre
 
 ## Links
 - [Reading List](./reading-list.html)
-- [Blog](./blog.html)
+- [Pixel 8 REsearch](./pixel8.html)
