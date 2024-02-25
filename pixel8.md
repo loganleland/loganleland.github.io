@@ -7,6 +7,16 @@ layout: default
 ![binjadeath](./images/pixel8.png)
 
 
+- [Setup Environment](https://leland.zip/pixel8.html#setup-environment)
+  - [Setup (rootless) Phone](https://leland.zip/pixel8.html#setup-rootless-phone)
+  - [Setup Host](https://leland.zip/pixel8.html#setup-host)
+- [Setup Host](https://leland.zip/pixel8.html#setup-host)
+- [WorkFlow](https://leland.zip/pixel8.html#workflow)
+- [Kernel](https://leland.zip/pixel8.html#kernel)
+  - [Generic Kernel Image (GKI)](https://leland.zip/pixel8.html#generic-kernel-image-gki)
+  - [Building Pixel Kernel](https://leland.zip/pixel8.html#building-pixel-kernels)
+- [GPU](https://leland.zip/pixel8.html#gpu)
+
 ## Setup Environment
 
 George Hotz: You gotta spend time to setup your environment nice because once your environment is nice everything else is nice. 
