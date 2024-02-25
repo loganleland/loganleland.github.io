@@ -144,6 +144,9 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
  
 #### Vulkan
 
+Vulkan is a low-overhead, cross-platform API for high-performance ~~vulnerabilities~~ 3D graphics
+
+
 - [Home page](https://www.vulkan.org/)
 - [Documentation](https://docs.vulkan.org/spec/latest/chapters/introduction.html)
 - [Code Samples](https://github.com/KhronosGroup/Vulkan-Samples)
