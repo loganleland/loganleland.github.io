@@ -85,18 +85,18 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
   - cd gs
   - git checkout android-gs-shusky-5.15-android14-d1
 
- #### Generic Kernel Image (GKI)
+#### Generic Kernel Image (GKI)
 
  Link to GKI doc: [Android GKI](https://source.android.com/docs/core/architecture/kernel/generic-kernel-image)
  
  ![gki](./images/generic-kernel-image-overview.png)
 
 
- #### Building Pixel Kernels
+#### Building Pixel Kernels
  
  This [link](https://source.android.com/docs/setup/build/building-pixel-kernels) provides step-by-step instructions on how to download, compile, and flash a custom Pixel kernel for development
 
- ### GPU
+### GPU
  
  The Pixel 8 uses Immortalis-G715
 
