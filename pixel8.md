@@ -18,6 +18,7 @@ layout: default
   - [Generic Kernel Image (GKI)](https://leland.zip/pixel8.html#generic-kernel-image-gki)
   - [Building Pixel Kernel](https://leland.zip/pixel8.html#building-pixel-kernels)
 - [GPU](https://leland.zip/pixel8.html#gpu)
+  - [Vulkan](https://leland.zip/pixel8.html#vulkan)
 
 ## Setup Environment
 
@@ -140,3 +141,13 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
   - lib64/libvendorgraphicbuffer.so
   - lib64/hw/android.hardware.graphics.allocator-aidl-impl.so
   - lib64/hw/android.hardware.graphics.mapper@4.0-impl.so
+ 
+#### Vulkan
+
+ ![Vulkan Components](./images/ape_graphics_vulkan.png)
+
+| Component name           | Provider             | Description                                                                                                                                                                                                                                                                                                                                                              |
+|--------------------------|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Vulkan Validation Layers | Android (in the NDK) | Libraries used during the development of Vulkan apps to find errors in an app's use of the Vulkan API. After API usage errors are found, these libraries should be removed.                                                                                                                                                                                              |
+| Vulkan Runtime           | Android              | A native library, libvulkan.so, that provides a native Vulkan API.    Most of Vulkan Runtime's functionality is implemented by a driver  provided by the GPU vendor. Vulkan Runtime wraps the driver, provides API  interception capabilities (for debugging and other developer tools), and  manages the interaction between the driver and the platform  dependencies. |
+| Vulkan Driver            | SoC                  | Maps the Vulkan API onto hardware-specific GPU commands and interactions with the kernel graphics driver.                                                                                                                                                                                                                                                                |
