@@ -86,10 +86,11 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
   - git checkout android-gs-shusky-5.15-android14-d1
 
  #### Generic Kernel Image (GKI)
+
+ Link to GKI doc: [Android GKI](https://source.android.com/docs/core/architecture/kernel/generic-kernel-image)
  
  ![gki](./images/generic-kernel-image-overview.png)
 
- Link to GKI doc: [Android GKI](https://source.android.com/docs/core/architecture/kernel/generic-kernel-image)
 
  #### Building Pixel Kernels
  
