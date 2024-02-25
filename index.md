@@ -9,5 +9,5 @@ I'm a vulnerability researcher with a focus on embedded linux systems. I'm curre
 ![pfp](./images/pfp.png)
 
 ## Links
-- [Reading List](./another-page.html)
-- [Blog](./another-page.html)
+- [Reading List](./reading-list.html)
+- [Blog](./blog.html)
