@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 /dev/mali0                0666   system     system
 /dev/ion                  0666   system     system
 /dev/ump                  0666   system     graphics

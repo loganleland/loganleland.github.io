@@ -90,7 +90,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
     Allow usb debugging on the phone. 
 
 ### Misc Files
-- [/vendor/etc/ueventd.rc](./files/pixel8/ueventd.html)
+- [/vendor/etc/ueventd.rc](./files/pixel8/ueventd.md)
 
 ### Kernel
 
