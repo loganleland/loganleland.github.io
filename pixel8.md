@@ -122,7 +122,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 
 - Documentation: [developer arm docs](https://developer.arm.com/Processors/Immortalis-G715#Technical-Specifications)
 - GPU device: ```/dev/mali0``` with permission 666
-- Files that directly reference /dev/mali0 from vendor image:
+- Files that directly reference ```/dev/mali0``` from vendor image:
   - vendor/google_devices/shiba/proprietary/lib64/libgpudataproducer.so
   - vendor/google_devices/shiba/proprietary/apex/com.google.pixel.camera.hal.apex
   - vendor/google_devices/shiba/proprietary/lib64/libmemtrack-pixel.so
