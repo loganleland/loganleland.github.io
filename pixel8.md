@@ -91,6 +91,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 
 ### Misc Files
 - [/vendor/etc/ueventd.rc](./files/pixel8/ueventd.html)
+- [/vendor/etc/selinux/vendor_file_contexts](./files/pixel8/vendor_file_contexts.html)
 
 ### Kernel
 
