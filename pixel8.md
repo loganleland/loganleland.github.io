@@ -14,6 +14,7 @@ layout: default
   - [Setup Host](https://leland.zip/pixel8.html#setup-host)
 - [Setup Host](https://leland.zip/pixel8.html#setup-host)
 - [WorkFlow](https://leland.zip/pixel8.html#workflow)
+- [Misc Files](https://leland.zip/pixel8.html#misc-files)
 - [Kernel](https://leland.zip/pixel8.html#kernel)
   - [Generic Kernel Image (GKI)](https://leland.zip/pixel8.html#generic-kernel-image-gki)
   - [Building Pixel Kernel](https://leland.zip/pixel8.html#building-pixel-kernels)
@@ -87,6 +88,9 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
     59253ADYT113RN unauthorized
     ```
     Allow usb debugging on the phone. 
+
+### Misc Files
+- [/vendor/etc/ueventd.rc](./files/pixel8/ueventd.rc)
 
 ### Kernel
 
