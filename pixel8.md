@@ -128,7 +128,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
  
  The Pixel 8 uses ARM Immortalis-G715
 
-- Google's git log: [log](https://android.googlesource.com/kernel/google-modules/gpu/+log/refs/heads/android-gs-shusky-5.15-android14-d1)
+- Google's shusky gpu git log: [log](https://android.googlesource.com/kernel/google-modules/gpu/+log/refs/heads/android-gs-shusky-5.15-android14-d1)
 - (some) Documentation: [developer arm docs](https://developer.arm.com/Processors/Immortalis-G715#Technical-Specifications)
 
 #### Public Vulns
