@@ -19,6 +19,8 @@ layout: default
   - [Generic Kernel Image (GKI)](https://leland.zip/pixel8.html#generic-kernel-image-gki)
   - [Building Pixel Kernel](https://leland.zip/pixel8.html#building-pixel-kernels)
 - [GPU](https://leland.zip/pixel8.html#gpu)
+  - [Public Vulns](https://leland.zip/pixel8.html#public-vulns)
+  - [Driver](https://leland.zip/pixel8.html#driver)
   - [Vulkan](https://leland.zip/pixel8.html#vulkan)
 
 ## Keeping up to date with Pixel 8 security
