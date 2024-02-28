@@ -21,6 +21,9 @@ layout: default
 - [GPU](https://leland.zip/pixel8.html#gpu)
   - [Vulkan](https://leland.zip/pixel8.html#vulkan)
 
+## Keeping up to date with Pixel 8 security
+- Pixel Update (security) Bulletins. This comes out monthly [link](https://source.android.com/docs/security/bulletin/pixel)
+
 ## Setup Environment
 
 [The Rising Sea](https://ncatlab.org/nlab/show/The+Rising+Sea) A hard nut may be cracked not immediately by sheer punctual force, but eventually by gently immersing it into a whole body of water.
@@ -124,32 +127,24 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
  The Pixel 8 uses ARM Immortalis-G715
 
 - Documentation: [developer arm docs](https://developer.arm.com/Processors/Immortalis-G715#Technical-Specifications)
+
+#### Public Vulns
+- [CVE-2023-48409 / CVE-2023-48421](https://nvd.nist.gov/vuln/detail/CVE-2023-48409): In gpu_pixel_handle_buffer_liveness_update_ioctl of private/google-modules/gpu/mali_kbase/mali_kbase_core_linux.c, there is a possible out of bounds write due to an integer overflow. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.
+- [CVE-2023-4211](https://nvd.nist.gov/vuln/detail/CVE-2023-4211) A local non-privileged user can make improper GPU memory processing operations to gain access to already freed memory. 
+
+
+#### Driver
 - GPU character device: ```/dev/mali0``` with permission 666
-- Files that directly reference ```/dev/mali0``` from vendor image:
-  - vendor/google_devices/shiba/proprietary/lib64/libgpudataproducer.so
-  - vendor/google_devices/shiba/proprietary/apex/com.google.pixel.camera.hal.apex
-  - vendor/google_devices/shiba/proprietary/lib64/libmemtrack-pixel.so
-  - vendor/google_devices/shiba/proprietary/lib64/lib_aion_buffer.so
 - Mali Kernel Drivers, loaded based on [vendor_boot_modules.slider](./files/pixel8/vendor_boot_modules.slider.html) 
   - mali_kbase.ko: Handles requests from a corresponding user side library to perform GPU operations. This driver is not open source.
   - mali_pixel.ko: TBD
-- Shusky google-modules/gpu provides file_operation structs / ioctl handler for interacting with ```mali_kbase.ko``` from userspace:
+- Shusky git repo: ```google-modules/gpu``` provides file_operation structs / ioctl handler for interacting with ```mali_kbase.ko``` from userspace:
   - Clone the repo: git clone https://android.googlesource.com/kernel/google-modules/gpu
   - Checkout the shusky branch: git checkout android-gs-shusky-5.15-android14-d1
   - ioctl handler of interest is in ```mali_kbase/mali_kbase_core_linux.c``` with signature ```static long kbase_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)```
   - To find all file op structs: ```grep -nr "file_operations```
-
-- Other files of **GPU** interest from vendor image:
-  - lib64/hw/vulkan.mali.so
-  - lib64/libOpenCL.so
-  - lib64/egl/libGLES_mali.so
-  - lib64/arm.mali.platform-V1-ndk.so
-  - lib64/libbw_av1enc.so
-  - lib64/libgc2_bw_av1_enc.so
-  - lib64/libvendorgraphicbuffer.so
-  - lib64/hw/android.hardware.graphics.allocator-aidl-impl.so
-  - lib64/hw/android.hardware.graphics.mapper@4.0-impl.so
  
+
 #### Vulkan
 
 Vulkan is a low-overhead, cross-platform API for high-performance ~~vulnerabilities~~ 3D graphics
