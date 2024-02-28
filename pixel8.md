@@ -142,7 +142,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
   - Clone the repo: git clone https://android.googlesource.com/kernel/google-modules/gpu
   - Checkout the shusky branch: git checkout android-gs-shusky-5.15-android14-d1
   - ioctl handler of interest is in ```mali_kbase/mali_kbase_core_linux.c``` with signature ```static long kbase_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)```
-  - To find all file op structs: ```grep -nr "file_operations```
+  - To find all file op structs: ```grep -nr "file_operations"```
  
 
 #### Vulkan
