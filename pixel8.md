@@ -131,7 +131,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
   - vendor/google_devices/shiba/proprietary/lib64/libmemtrack-pixel.so
   - vendor/google_devices/shiba/proprietary/lib64/lib_aion_buffer.so
 - Mali Kernel Drivers, loaded based on [vendor_boot_modules.slider](./files/pixel8/vendor_boot_modules.slider.html) 
-  - mali_kbase.ko
+  - mali_kbase.ko: Handles requests from a corresponding user side library to perform GPU operations
   - mali_pixel.ko
 
 
