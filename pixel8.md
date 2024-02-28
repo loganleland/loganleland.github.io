@@ -121,19 +121,23 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 
 ### GPU
  
- The Pixel 8 uses Immortalis-G715
+ The Pixel 8 uses ARM Immortalis-G715
 
 - Documentation: [developer arm docs](https://developer.arm.com/Processors/Immortalis-G715#Technical-Specifications)
-- GPU device: ```/dev/mali0``` with permission 666
+- GPU character device: ```/dev/mali0``` with permission 666
 - Files that directly reference ```/dev/mali0``` from vendor image:
   - vendor/google_devices/shiba/proprietary/lib64/libgpudataproducer.so
   - vendor/google_devices/shiba/proprietary/apex/com.google.pixel.camera.hal.apex
   - vendor/google_devices/shiba/proprietary/lib64/libmemtrack-pixel.so
   - vendor/google_devices/shiba/proprietary/lib64/lib_aion_buffer.so
 - Mali Kernel Drivers, loaded based on [vendor_boot_modules.slider](./files/pixel8/vendor_boot_modules.slider.html) 
-  - mali_kbase.ko: Handles requests from a corresponding user side library to perform GPU operations
-  - mali_pixel.ko
-
+  - mali_kbase.ko: Handles requests from a corresponding user side library to perform GPU operations. This driver is not open source.
+  - mali_pixel.ko: TBD
+- Shusky google-modules/gpu provides file_operation structs / ioctl handler for interacting with ```mali_kbase.ko``` from userspace:
+  - Clone the repo: git clone https://android.googlesource.com/kernel/google-modules/gpu
+  - Checkout the shusky branch: git checkout android-gs-shusky-5.15-android14-d1
+  - ioctl handler of interest is in ```mali_kbase/mali_kbase_core_linux.c``` with signature ```static long kbase_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)```
+  - To find all file op structs: ```grep -nr "file_operations```
 
 - Other files of **GPU** interest from vendor image:
   - lib64/hw/vulkan.mali.so
