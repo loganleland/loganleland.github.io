@@ -30,3 +30,6 @@ A collection of useful literature
 - Linux: https://github.com/torvalds/linux/blob/master/Documentation/index.rst
 - Andoird bionic: https://android.googlesource.com/platform/bionic/
 - Corkami: https://github.com/corkami/pics/tree/master/binary
+
+### Videos
+- DIFUZE: Android Kernel Driver Fuzzing: https://www.youtube.com/watch?v=XFDHzSLGx7o&t=1s
