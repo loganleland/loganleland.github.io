@@ -92,11 +92,11 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 ### Misc Files
 - [/vendor/etc/ueventd.rc](./files/pixel8/ueventd.html)
 - [/vendor/etc/selinux/vendor_file_contexts](./files/pixel8/vendor_file_contexts.html)
+- [vendor_boot_modules.slider](./files/pixel8/vendor_boot_modules.slider.html)
 
 ### Kernel
 
  The Pixel 8 has a codeword of shiba and the Pixel 8 Pro has a codeword of husky. Combining these codewords produces shusky. 
-
  
 - Binary path in AOSP tree: [device/google/shusky-kernel](https://android.googlesource.com/device/google/shusky-kernel/)
 - Repository branch: [android-gs-shusky-5.15-android14-d1](https://android.googlesource.com/kernel/google-modules/soc/gs/+/refs/heads/android-gs-shusky-5.15-android14-d1)
@@ -127,13 +127,9 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
   - vendor/google_devices/shiba/proprietary/apex/com.google.pixel.camera.hal.apex
   - vendor/google_devices/shiba/proprietary/lib64/libmemtrack-pixel.so
   - vendor/google_devices/shiba/proprietary/lib64/lib_aion_buffer.so
-- Acquire a driver binary blob:
-  - Download the corresponding vendor [image](https://developers.google.com/android/drivers#shiba)
-  - Extract and execute ```extract-google_devices-shiba.sh```
-  - cd vendor/google_devices/shiba/proprietary
-  - 7z x vendor.img
-  - The gpu driver binary blob is at:
-    ```vendor/google_devices/shiba/proprietary/firmware/mali_csffw.bin```
+- Mali Kernel Drivers, loaded based on [vendor_boot_modules.slider](./files/pixel8/vendor_boot_modules.slider.html) 
+  - mali_kbase.ko
+  - mali_pixel.ko
 
 
 - Other files of **GPU** interest from vendor image:
