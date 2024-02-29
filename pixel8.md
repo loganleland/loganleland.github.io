@@ -145,8 +145,62 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
   - Clone the repo: git clone https://android.googlesource.com/kernel/google-modules/gpu
   - Checkout the shusky branch: git checkout android-gs-shusky-5.15-android14-d1
   - ioctl handler of interest is in ```mali_kbase/mali_kbase_core_linux.c``` with signature ```static long kbase_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)```
-  - To find all file op structs: ```grep -nr "file_operations"```
- 
+  - file_operations struct with ioctl handler for mali_kbase:
+```
+static const struct file_operations kbase_fops = {
+  .owner = THIS_MODULE,
+  .open = kbase_open,
+  .release = kbase_release,
+  .read = kbase_read,
+  .poll = kbase_poll,
+  .unlocked_ioctl = kbase_ioctl,
+  .compat_ioctl = kbase_ioctl,
+  .mmap = kbase_mmap,
+  .check_flags = kbase_check_flags,
+  .get_unmapped_area = kbase_get_unmapped_area,
+};
+```
+- List of ```KBASE_IOCTL_TYPE``` in gpu/common/include/uapi/gpu/arm/midgard/mali_kbase_ioctl.h
+  - KBASE_IOCTL_SET_FLAGS: _IOW(KBASE_IOCTL_TYPE, 1, struct kbase_ioctl_set_flags)
+  - KBASE_IOCTL_GET_GPUPROPS: _IOW(KBASE_IOCTL_TYPE, 3, struct kbase_ioctl_get_gpuprops)
+  - KBASE_IOCTL_MEM_ALLOC: _IOWR(KBASE_IOCTL_TYPE, 5, union kbase_ioctl_mem_alloc)
+  - KBASE_IOCTL_MEM_QUERY: _IOWR(KBASE_IOCTL_TYPE, 6, union kbase_ioctl_mem_query)
+  - KBASE_IOCTL_MEM_FREE: _IOW(KBASE_IOCTL_TYPE, 7, struct kbase_ioctl_mem_free)
+  - KBASE_IOCTL_HWCNT_READER_SETUP: _IOW(KBASE_IOCTL_TYPE, 8, struct kbase_ioctl_hwcnt_reader_setup)
+  - KBASE_IOCTL_HWCNT_SET: _IOW(KBASE_IOCTL_TYPE, 32, struct kbase_ioctl_hwcnt_values)
+  - KBASE_IOCTL_DISJOINT_QUERY: _IOR(KBASE_IOCTL_TYPE, 12, struct kbase_ioctl_disjoint_query)
+  - KBASE_IOCTL_GET_DDK_VERSION: _IOW(KBASE_IOCTL_TYPE, 13, struct kbase_ioctl_get_ddk_version)
+  - KBASE_IOCTL_MEM_JIT_INIT_10_2: _IOW(KBASE_IOCTL_TYPE, 14, struct kbase_ioctl_mem_jit_init_10_2)
+  - KBASE_IOCTL_MEM_JIT_INIT_11_5: _IOW(KBASE_IOCTL_TYPE, 14, struct kbase_ioctl_mem_jit_init_11_5)
+  - KBASE_IOCTL_MEM_JIT_INIT: _IOW(KBASE_IOCTL_TYPE, 14, struct kbase_ioctl_mem_jit_init)
+  - KBASE_IOCTL_MEM_SYNC: _IOW(KBASE_IOCTL_TYPE, 15, struct kbase_ioctl_mem_sync)
+  - KBASE_IOCTL_MEM_FIND_CPU_OFFSET: _IOWR(KBASE_IOCTL_TYPE, 16, union kbase_ioctl_mem_find_cpu_offset)
+  - KBASE_IOCTL_GET_CONTEXT_ID: _IOR(KBASE_IOCTL_TYPE, 17, struct kbase_ioctl_get_context_id)
+  - KBASE_IOCTL_TLSTREAM_ACQUIRE: _IOW(KBASE_IOCTL_TYPE, 18, struct kbase_ioctl_tlstream_acquire)
+  - KBASE_IOCTL_TLSTREAM_FLUSH _IO(KBASE_IOCTL_TYPE, 19)
+  - KBASE_IOCTL_MEM_COMMIT: _IOW(KBASE_IOCTL_TYPE, 20, struct kbase_ioctl_mem_commit)
+  - KBASE_IOCTL_MEM_ALIAS: _IOWR(KBASE_IOCTL_TYPE, 21, union kbase_ioctl_mem_alias)
+  - KBASE_IOCTL_MEM_IMPORT: _IOWR(KBASE_IOCTL_TYPE, 22, union kbase_ioctl_mem_import)
+  - KBASE_IOCTL_MEM_FLAGS_CHANGE: _IOW(KBASE_IOCTL_TYPE, 23, struct kbase_ioctl_mem_flags_change)
+  - KBASE_IOCTL_STREAM_CREATE: _IOW(KBASE_IOCTL_TYPE, 24, struct kbase_ioctl_stream_create)
+  - KBASE_IOCTL_FENCE_VALIDATE: _IOW(KBASE_IOCTL_TYPE, 25, struct kbase_ioctl_fence_validate)
+  - KBASE_IOCTL_MEM_PROFILE_ADD: _IOW(KBASE_IOCTL_TYPE, 27, struct kbase_ioctl_mem_profile_add)
+  - KBASE_IOCTL_STICKY_RESOURCE_MAP: _IOW(KBASE_IOCTL_TYPE, 29, struct kbase_ioctl_sticky_resource_map)
+  - KBASE_IOCTL_STICKY_RESOURCE_UNMAP: _IOW(KBASE_IOCTL_TYPE, 30, struct kbase_ioctl_sticky_resource_unmap)
+  - KBASE_IOCTL_MEM_FIND_GPU_START_AND_OFFSET:_IOWR(KBASE_IOCTL_TYPE, 31, union kbase_ioctl_mem_find_gpu_start_and_offset)
+  - KBASE_IOCTL_CINSTR_GWT_START _IO(KBASE_IOCTL_TYPE, 33)
+  - KBASE_IOCTL_CINSTR_GWT_STOP _IO(KBASE_IOCTL_TYPE, 34)
+  - KBASE_IOCTL_CINSTR_GWT_DUMP: _IOWR(KBASE_IOCTL_TYPE, 35, union kbase_ioctl_cinstr_gwt_dump)
+  - KBASE_IOCTL_MEM_EXEC_INIT: _IOW(KBASE_IOCTL_TYPE, 38, struct kbase_ioctl_mem_exec_init)
+  - KBASE_IOCTL_GET_CPU_GPU_TIMEINFO: _IOWR(KBASE_IOCTL_TYPE, 50, union kbase_ioctl_get_cpu_gpu_timeinfo)
+  - KBASE_IOCTL_CONTEXT_PRIORITY_CHECK: _IOWR(KBASE_IOCTL_TYPE, 54, struct kbase_ioctl_context_priority_check)
+  - KBASE_IOCTL_SET_LIMITED_CORE_COUNT: _IOW(KBASE_IOCTL_TYPE, 55, struct kbase_ioctl_set_limited_core_count)
+  - KBASE_IOCTL_KINSTR_PRFCNT_ENUM_INFO: _IOWR(KBASE_IOCTL_TYPE, 56, struct kbase_ioctl_kinstr_prfcnt_enum_info)
+  - KBASE_IOCTL_KINSTR_PRFCNT_SETUP: _IOWR(KBASE_IOCTL_TYPE, 57, union kbase_ioctl_kinstr_prfcnt_setup)
+  - KBASE_IOCTL_APC_REQUEST: _IOW(KBASE_IOCTL_TYPE, 66, struct kbase_ioctl_apc_request)
+  - KBASE_IOCTL_BUFFER_LIVENESS_UPDATE: _IOW(KBASE_IOCTL_TYPE, 67, struct kbase_ioctl_buffer_liveness_update)
+  - (not compiled in release builds) KBASE_IOCTL_TEST_TYPE (KBASE_IOCTL_TYPE + 1)
+  - (not compiled in release builds) KBASE_IOCTL_EXTRA_TYPE (KBASE_IOCTL_TYPE + 2)
 
 #### Vulkan
 
