@@ -170,7 +170,7 @@ static const struct file_operations kbase_fops = {
 | -    | -           | -          | -              | -      |
 | KBASE_IOCTL_SET_FLAGS | Set kernel context creation flags | 1 | _IOW | <pre>struct kbase_ioctl_set_flags {<br>  __u32 create_flags;<br>};</pre> |
 | KBASE_IOCTL_GET_GPUPROPS | Read GPU properties from the kernel | 3 | _IOW | <pre>struct kbase_ioctl_get_gpuprops {<br>  __u64 buffer;  <br>  __u32 size;<br>  __u32 flags;<br>};</pre> |
-| KBASE_IOCTL_MEM_ALLOC | Allocate memory on the GPU | 5 | _IOWR | <pre>union kbase_ioctl_mem_alloc {<br>  struct {<br>    __u64 va_pages;<br>    __u64 commit_pages;<br>    __u64 extension;<br>    __u64 flags;<br>  } in;<br>  struct {<br>    __u64 flags;<br>    __u64 gpu_va;<br>  } out;<br>}; |
+| KBASE_IOCTL_MEM_ALLOC | Allocate memory on the GPU | 5 | _IOWR | <pre>union kbase_ioctl_mem_alloc {<br>  struct {<br>    __u64 va_pages;<br>    __u64 commit_pages;<br>    __u64 extension;<br>    __u64 flags;<br>  } in;<br>  struct {<br>    __u64 flags;<br>    __u64 gpu_va;<br>  } out;<br>};</pre> |
 | KBASE_IOCTL_MEM_QUERY | Query properties of a GPU memory region | 6 | _IOWR | <pre>union kbase_ioctl_mem_query {<br>  struct {<br>    __u64 gpu_addr;<br>    __u64 query;<br>  } in;<br>  struct {<br>    __u64 value;<br>  } out;<br>};</pre> |
 | KBASE_IOCTL_MEM_FREE | Free a memory region | 7 | _IOW | <pre>struct kbase_ioctl_mem_free {<br>  __u64 gpu_addr;<br>};</pre> |
 | KBASE_IOCTL_HWCNT_READER_SETUP | Setup HWC dumper/reader | 8 | _IOW | <pre>struct kbase_ioctl_hwcnt_reader_setup {<br>  __u32 buffer_count;<br>  __u32 fe_bm;<br>  __u32 shader_bm;<br>  __u32 tiler_bm;<br>  __u32 mmu_l2_bm;<br>};</pre> |
