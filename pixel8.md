@@ -161,46 +161,52 @@ static const struct file_operations kbase_fops = {
 };
 ```
 - List of ```KBASE_IOCTL_TYPE``` in gpu/common/include/uapi/gpu/arm/midgard/mali_kbase_ioctl.h
-  - KBASE_IOCTL_SET_FLAGS: _IOW(KBASE_IOCTL_TYPE, 1, struct kbase_ioctl_set_flags)
-  - KBASE_IOCTL_GET_GPUPROPS: _IOW(KBASE_IOCTL_TYPE, 3, struct kbase_ioctl_get_gpuprops)
-  - KBASE_IOCTL_MEM_ALLOC: _IOWR(KBASE_IOCTL_TYPE, 5, union kbase_ioctl_mem_alloc)
-  - KBASE_IOCTL_MEM_QUERY: _IOWR(KBASE_IOCTL_TYPE, 6, union kbase_ioctl_mem_query)
-  - KBASE_IOCTL_MEM_FREE: _IOW(KBASE_IOCTL_TYPE, 7, struct kbase_ioctl_mem_free)
-  - KBASE_IOCTL_HWCNT_READER_SETUP: _IOW(KBASE_IOCTL_TYPE, 8, struct kbase_ioctl_hwcnt_reader_setup)
-  - KBASE_IOCTL_HWCNT_SET: _IOW(KBASE_IOCTL_TYPE, 32, struct kbase_ioctl_hwcnt_values)
-  - KBASE_IOCTL_DISJOINT_QUERY: _IOR(KBASE_IOCTL_TYPE, 12, struct kbase_ioctl_disjoint_query)
-  - KBASE_IOCTL_GET_DDK_VERSION: _IOW(KBASE_IOCTL_TYPE, 13, struct kbase_ioctl_get_ddk_version)
-  - KBASE_IOCTL_MEM_JIT_INIT_10_2: _IOW(KBASE_IOCTL_TYPE, 14, struct kbase_ioctl_mem_jit_init_10_2)
-  - KBASE_IOCTL_MEM_JIT_INIT_11_5: _IOW(KBASE_IOCTL_TYPE, 14, struct kbase_ioctl_mem_jit_init_11_5)
-  - KBASE_IOCTL_MEM_JIT_INIT: _IOW(KBASE_IOCTL_TYPE, 14, struct kbase_ioctl_mem_jit_init)
-  - KBASE_IOCTL_MEM_SYNC: _IOW(KBASE_IOCTL_TYPE, 15, struct kbase_ioctl_mem_sync)
-  - KBASE_IOCTL_MEM_FIND_CPU_OFFSET: _IOWR(KBASE_IOCTL_TYPE, 16, union kbase_ioctl_mem_find_cpu_offset)
-  - KBASE_IOCTL_GET_CONTEXT_ID: _IOR(KBASE_IOCTL_TYPE, 17, struct kbase_ioctl_get_context_id)
-  - KBASE_IOCTL_TLSTREAM_ACQUIRE: _IOW(KBASE_IOCTL_TYPE, 18, struct kbase_ioctl_tlstream_acquire)
-  - KBASE_IOCTL_TLSTREAM_FLUSH _IO(KBASE_IOCTL_TYPE, 19)
-  - KBASE_IOCTL_MEM_COMMIT: _IOW(KBASE_IOCTL_TYPE, 20, struct kbase_ioctl_mem_commit)
-  - KBASE_IOCTL_MEM_ALIAS: _IOWR(KBASE_IOCTL_TYPE, 21, union kbase_ioctl_mem_alias)
-  - KBASE_IOCTL_MEM_IMPORT: _IOWR(KBASE_IOCTL_TYPE, 22, union kbase_ioctl_mem_import)
-  - KBASE_IOCTL_MEM_FLAGS_CHANGE: _IOW(KBASE_IOCTL_TYPE, 23, struct kbase_ioctl_mem_flags_change)
-  - KBASE_IOCTL_STREAM_CREATE: _IOW(KBASE_IOCTL_TYPE, 24, struct kbase_ioctl_stream_create)
-  - KBASE_IOCTL_FENCE_VALIDATE: _IOW(KBASE_IOCTL_TYPE, 25, struct kbase_ioctl_fence_validate)
-  - KBASE_IOCTL_MEM_PROFILE_ADD: _IOW(KBASE_IOCTL_TYPE, 27, struct kbase_ioctl_mem_profile_add)
-  - KBASE_IOCTL_STICKY_RESOURCE_MAP: _IOW(KBASE_IOCTL_TYPE, 29, struct kbase_ioctl_sticky_resource_map)
-  - KBASE_IOCTL_STICKY_RESOURCE_UNMAP: _IOW(KBASE_IOCTL_TYPE, 30, struct kbase_ioctl_sticky_resource_unmap)
-  - KBASE_IOCTL_MEM_FIND_GPU_START_AND_OFFSET:_IOWR(KBASE_IOCTL_TYPE, 31, union kbase_ioctl_mem_find_gpu_start_and_offset)
-  - KBASE_IOCTL_CINSTR_GWT_START _IO(KBASE_IOCTL_TYPE, 33)
-  - KBASE_IOCTL_CINSTR_GWT_STOP _IO(KBASE_IOCTL_TYPE, 34)
-  - KBASE_IOCTL_CINSTR_GWT_DUMP: _IOWR(KBASE_IOCTL_TYPE, 35, union kbase_ioctl_cinstr_gwt_dump)
-  - KBASE_IOCTL_MEM_EXEC_INIT: _IOW(KBASE_IOCTL_TYPE, 38, struct kbase_ioctl_mem_exec_init)
-  - KBASE_IOCTL_GET_CPU_GPU_TIMEINFO: _IOWR(KBASE_IOCTL_TYPE, 50, union kbase_ioctl_get_cpu_gpu_timeinfo)
-  - KBASE_IOCTL_CONTEXT_PRIORITY_CHECK: _IOWR(KBASE_IOCTL_TYPE, 54, struct kbase_ioctl_context_priority_check)
-  - KBASE_IOCTL_SET_LIMITED_CORE_COUNT: _IOW(KBASE_IOCTL_TYPE, 55, struct kbase_ioctl_set_limited_core_count)
-  - KBASE_IOCTL_KINSTR_PRFCNT_ENUM_INFO: _IOWR(KBASE_IOCTL_TYPE, 56, struct kbase_ioctl_kinstr_prfcnt_enum_info)
-  - KBASE_IOCTL_KINSTR_PRFCNT_SETUP: _IOWR(KBASE_IOCTL_TYPE, 57, union kbase_ioctl_kinstr_prfcnt_setup)
-  - KBASE_IOCTL_APC_REQUEST: _IOW(KBASE_IOCTL_TYPE, 66, struct kbase_ioctl_apc_request)
-  - KBASE_IOCTL_BUFFER_LIVENESS_UPDATE: _IOW(KBASE_IOCTL_TYPE, 67, struct kbase_ioctl_buffer_liveness_update)
-  - (not compiled in release builds) KBASE_IOCTL_TEST_TYPE (KBASE_IOCTL_TYPE + 1)
-  - (not compiled in release builds) KBASE_IOCTL_EXTRA_TYPE (KBASE_IOCTL_TYPE + 2)
+  - ```_IO``` means there's no parameters
+  - ```_IOW``` means userland is writing and kernel is reading
+  - ```_IOR``` means userland is reading and kernel is writing
+  - ```_IORW``` menas ```_IOW``` and ```_IOR```
+
+| Name | Description | Command ID | Data Direction | struct |
+| -    | -           | -          | -              | -      |
+| KBASE_IOCTL_SET_FLAGS | Set kernel context creation flags | 1 | _IOW | <pre>struct kbase_ioctl_set_flags {<br>  __u32 create_flags;<br>};</pre> |
+| KBASE_IOCTL_GET_GPUPROPS | Read GPU properties from the kernel | 3 | _IOW | <pre>struct kbase_ioctl_get_gpuprops {<br>  __u64 buffer;  <br>  __u32 size;<br>  __u32 flags;<br>};</pre> |
+| KBASE_IOCTL_MEM_ALLOC | Allocate memory on the GPU | 5 | _IOWR | <pre>union kbase_ioctl_mem_alloc {<br>  struct {<br>    __u64 va_pages;<br>    __u64 commit_pages;<br>    __u64 extension;<br>    __u64 flags;<br>  } in;<br>  struct {<br>    __u64 flags;<br>    __u64 gpu_va;<br>  } out;<br>}; |
+| KBASE_IOCTL_MEM_QUERY | Query properties of a GPU memory region | 6 | _IOWR | <pre>union kbase_ioctl_mem_query {<br>  struct {<br>    __u64 gpu_addr;<br>    __u64 query;<br>  } in;<br>  struct {<br>    __u64 value;<br>  } out;<br>};</pre> |
+| KBASE_IOCTL_MEM_FREE | Free a memory region | 7 | _IOW | <pre>struct kbase_ioctl_mem_free {<br>  __u64 gpu_addr;<br>};</pre> |
+| KBASE_IOCTL_HWCNT_READER_SETUP | Setup HWC dumper/reader | 8 | _IOW | <pre>struct kbase_ioctl_hwcnt_reader_setup {<br>  __u32 buffer_count;<br>  __u32 fe_bm;<br>  __u32 shader_bm;<br>  __u32 tiler_bm;<br>  __u32 mmu_l2_bm;<br>};</pre> |
+| KBASE_IOCTL_DISJOINT_QUERY | Query the disjoint counter | 12 | _IOR | <pre>struct kbase_ioctl_disjoint_query {<br>  __u32 counter;<br>};</pre> |
+| KBASE_IOCTL_GET_DDK_VERSION | Query the kernel version | 13 | _IOW | <pre>struct kbase_ioctl_get_ddk_version {<br>  __u64 version_buffer;<br>  __u32 size;<br>  __u32 padding;<br>};</pre> |
+| KBASE_IOCTL_MEM_JIT_INIT_10_2 | Initialize the just-in-time memory allocator (between kernel driver version 10.2--11.4) | 14 | _IOW | <pre>struct kbase_ioctl_mem_jit_init_10_2 {<br>  __u64 va_pages;<br>};</pre> |
+| KBASE_IOCTL_MEM_JIT_INIT_11_5 | Initialize the just-in-time memory allocator (between kernel driver version 11.5--11.19) | 14 | _IOW | <pre>struct kbase_ioctl_mem_jit_init_11_5 {<br>  __u64 va_pages;<br>  __u8 max_allocations;<br>  __u8 trim_level;<br>  __u8 group_id;<br>  __u8 padding[5];<br>};</pre> |
+| KBASE_IOCTL_MEM_JIT_INIT | Initialize the just-in-time memory allocator | 14 | _IOW | <pre>struct kbase_ioctl_mem_jit_init {<br>  __u64 va_pages;<br>  __u8 max_allocations;<br>  __u8 trim_level;<br>  __u8 group_id;<br>  __u8 padding[5];<br>  __u64 phys_pages;<br>};</pre> |
+| KBASE_IOCTL_MEM_SYNC | Perform cache maintenance on memory | 15 | _IOW | <pre>struct kbase_ioctl_mem_sync {<br>  __u64 handle;<br>  __u64 user_addr;<br>  __u64 size;<br>  __u8 type;<br>  __u8 padding[7];<br>};</pre> |
+| KBASE_IOCTL_MEM_FIND_CPU_OFFSET | Find the offset of a CPU pointer | 16 | _IOWR | <pre>union kbase_ioctl_mem_find_cpu_offset {<br>  struct {<br>    __u64 gpu_addr;<br>    __u64 cpu_addr;<br>    __u64 size;<br>  } in;<br>  struct {<br>    __u64 offset;<br>  } out;<br>};</pre> |
+| KBASE_IOCTL_GET_CONTEXT_ID | Get the kernel context ID | 17 | _IOR | <pre>struct kbase_ioctl_get_context_id {<br>  __u32 id;<br>};</pre> |
+| KBASE_IOCTL_TLSTREAM_ACQUIRE | Acquire a tlstream fd | 18 | _IOR | <pre>struct kbase_ioctl_tlstream_acquire {<br>  __u32 flags;<br>};</pre> |
+| KBASE_IOCTL_TLSTREAM_FLUSH | Flush a tlstream | 19 | _IO |  |
+| KBASE_IOCTL_MEM_COMMIT | Change the amount of memory backing a region | 20 | _IOW | <pre>struct kbase_ioctl_mem_commit {<br>  __u64 gpu_addr;<br>  __u64 pages;<br>};</pre> |
+| KBASE_IOCTL_MEM_ALIAS | Create an alias of memory regions | 21 | _IOWR | <pre>union kbase_ioctl_mem_alias {<br>  struct {<br>    __u64 flags;<br>    __u64 stride;<br>    __u64 nents;<br>    __u64 aliasing_info;<br>  } in;<br>  struct {<br>    __u64 flags;<br>    __u64 gpu_va;<br>    __u64 va_pages;<br>  } out;<br>};</pre> |
+| KBASE_IOCTL_MEM_IMPORT | Import memory for use by the GPU | 22 | _IOWR | <pre>union kbase_ioctl_mem_import {<br>  struct {<br>    __u64 flags;<br>    __u64 phandle;<br>    __u32 type;<br>    __u32 padding;<br>  } in;<br>  struct {<br>    __u64 flags;<br>    __u64 gpu_va;<br>    __u64 va_pages;<br>  } out;<br>};</pre> |
+| KBASE_IOCTL_MEM_FLAGS_CHANGE | Change the flags for a memory region | 23 | _IOW | <pre>struct kbase_ioctl_mem_flags_change {<br>  __u64 gpu_va;<br>  __u64 flags;<br>  __u64 mask;<br>};</pre> |
+| KBASE_IOCTL_STREAM_CREATE | Create a synchronisation stream. Note that this is also called a "timeline" | 24 | _IOW | <pre>struct kbase_ioctl_stream_create {<br>  char name[32];<br>};</pre> |
+| KBASE_IOCTL_FENCE_VALIDATE | Validate a fd refers to a fence | 25 | _IOW | <pre>struct kbase_ioctl_fence_validate {<br>  int fd;<br>};</pre> |
+| KBASE_IOCTL_MEM_PROFILE_ADD | Provide profiling information to kernel | 27 | _IOW | <pre>struct kbase_ioctl_mem_profile_add {<br>  __u64 buffer;<br>  __u32 len;<br>  __u32 padding;<br>};</pre> |
+| KBASE_IOCTL_STICKY_RESOURCE_MAP | Permanently map an external resource | 29 | _IOW | <pre>struct kbase_ioctl_sticky_resource_map {<br>  __u64 count;<br>  __u64 address;<br>};</pre> |
+| KBASE_IOCTL_STICKY_RESOURCE_UNMAP | Unmap a resource mapped which was previously permanently mapped | 30 | _IOW | <pre>struct kbase_ioctl_sticky_resource_unmap {<br>  __u64 count;<br>  __u64 address;<br>};</pre> |
+| KBASE_IOCTL_MEM_FIND_GPU_START_AND_OFFSET | Find the start address of the GPU memory region for the given gpu address and the offset of that address into the region | 31 | _IOWR | <pre>union kbase_ioctl_mem_find_gpu_start_and_offset {<br>  struct {<br>    __u64 gpu_addr;<br>    __u64 size;<br>  } in;<br>  struct {<br>    __u64 start;<br>    __u64 offset;<br>  } out;<br>};</pre> |
+| KBASE_IOCTL_HWCNT_SET | Values to set dummy the dummy counters to| 32 | _IOW | <pre>struct kbase_ioctl_hwcnt_values {<br>  __u64 data;<br>  __u32 size;<br>  __u32 padding;<br>};</pre> |
+| KBASE_IOCTL_CINSTR_GWT_START | | 33 | _IO | |
+| KBASE_IOCTL_CINSTR_GWT_STOP | | 34 | _IO | |
+| KBASE_IOCTL_CINSTR_GWT_DUMP | Used to collect all GPU write fault addresses | 35 | _IOWR | <pre>union kbase_ioctl_cinstr_gwt_dump {<br>  struct {<br>    __u64 addr_buffer;<br>    __u64 size_buffer;<br>    __u32 len;<br>    __u32 padding;<br>  } in;<br>  struct {<br>    __u32 no_of_addr_collected;<br>    __u8 more_data_available;<br>    __u8 padding[27];<br>  } out;<br>};</pre> |
+| KBASE_IOCTL_MEM_EXEC_INIT | Initialise the EXEC_VA memory zone | 38 | _IOW | <pre>struct kbase_ioctl_mem_exec_init {<br>  __u64 va_pages;<br>};</pre> |
+| KBASE_IOCTL_GET_CPU_GPU_TIMEINFO | Request zero or more types of cpu/gpu time (counter values) | 50 | _IOWR | <pre>union kbase_ioctl_get_cpu_gpu_timeinfo {<br>  struct {<br>    __u32 request_flags;<br>    __u32 paddings[7];<br>  } in;<br>  struct {<br>    __u64 sec;<br>    __u32 nsec;<br>    __u32 padding;<br>    __u64 timestamp;<br>    __u64 cycle_counter;<br>  } out;<br>};</pre> |
+| KBASE_IOCTL_CONTEXT_PRIORITY_CHECK | Check the max possible priority | 54 | _IOWR | <pre>struct kbase_ioctl_context_priority_check {<br>  __u8 priority;<br>};</pre> |
+| KBASE_IOCTL_SET_LIMITED_CORE_COUNT | Set the limited core count | 55 | _IOW | <pre>struct kbase_ioctl_set_limited_core_count {<br>  __u8 max_core_count;<br>};</pre> |
+| KBASE_IOCTL_KINSTR_PRFCNT_ENUM_INFO | Enum Performance counter information | 56 | _IOWR | <pre>struct kbase_ioctl_kinstr_prfcnt_enum_info {<br>  __u32 info_item_size;<br>  __u32 info_item_count;<br>  __u64 info_list_ptr;<br>};</pre> |
+| KBASE_IOCTL_KINSTR_PRFCNT_SETUP | Setup HWC dumper/reader | 57 | _IOWR | <pre>union kbase_ioctl_kinstr_prfcnt_setup {<br>  struct {<br>    __u32 request_item_count;<br>    __u32 request_item_size;<br    __u64 requests_ptr;<br>  } in;<br>  struct {<br>    __u32 prfcnt_metadata_item_size;<br>    __u32 prfcnt_mmap_size_bytes;<br>  } out;<br>};</pre> |
+| KBASE_IOCTL_APC_REQUEST | (Pixel specific ioctl) GPU asynchronous power control (APC) request | 66 | _IOW | <pre>struct kbase_ioctl_apc_request {<br>  __u32 dur_usec;<br>};</pre> |
+| KBASE_IOCTL_BUFFER_LIVENESS_UPDATE | (Pixel specific ioctl) Update the live ranges of buffers from previous frame| 67 | _IOW | <pre>struct kbase_ioctl_buffer_liveness_update {<br>  __u64 live_ranges_address;<br>  __u64 live_ranges_count;<br>  __u64 buffer_va_address;<br>  __u64 buffer_sizes_address;<br>  __u64 buffer_count;<br>};</pre> |
+
 
 #### Vulkan
 
