@@ -209,10 +209,10 @@ int main(void) {
 ```
   
 - List of ```KBASE_IOCTL_TYPE``` in gpu/common/include/uapi/gpu/arm/midgard/mali_kbase_ioctl.h
-  - ```_IO``` means there's no parameters
-  - ```_IOW``` means userland is writing and kernel is reading
-  - ```_IOR``` means userland is reading and kernel is writing
-  - ```_IORW``` menas ```_IOW``` and ```_IOR```
+  - ```_IO```: there's no parameters
+  - ```_IOW```: userland is writing and kernel is reading
+  - ```_IOR```: userland is reading and kernel is writing
+  - ```_IORW```: ```_IOW``` and ```_IOR```
 
 | Name | Description | Command ID | Data Direction | struct |
 | -    | -           | -          | -              | -      |
