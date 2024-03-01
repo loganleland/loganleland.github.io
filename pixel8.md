@@ -160,6 +160,54 @@ static const struct file_operations kbase_fops = {
   .get_unmapped_area = kbase_get_unmapped_area,
 };
 ```
+- Example code for opening ```/dev/mali0``` and sending an ioctl to retrieve version major and minor
+
+```C
+#include <dlfcn.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/ioctl.h>
+#include <errno.h>
+
+struct kbase_ioctl_version_check {
+  __u16 major;
+  __u16 minor;
+};
+
+#define KBASE_IOCTL_TYPE 0x80
+
+#define KBASE_IOCTL_VERSION_CHECK \
+  _IOWR(KBASE_IOCTL_TYPE, 52, struct kbase_ioctl_version_check)
+
+int main(void) {
+
+  int fd = open("/dev/mali0", O_RDWR);
+  if (-1 == fd)
+  {
+    printf("Failed to open /dev/mali0\n");
+    return -1;
+  }
+  else
+  {
+    printf("Opened /dev/mali0\n");
+  }
+
+  struct kbase_ioctl_version_check param = {0};
+  int res = ioctl(fd, KBASE_IOCTL_VERSION_CHECK, &param);
+  if (res < 0) {
+    int err = errno;
+    printf("version check failed with code: %d\n", err);
+  }
+  else
+  {
+    printf("version check success\n - code: %d\n - major: %d\n - minor: %d\n",
+           res, param.major, param.minor);
+  }
+
+  return 0;
+}
+```
+  
 - List of ```KBASE_IOCTL_TYPE``` in gpu/common/include/uapi/gpu/arm/midgard/mali_kbase_ioctl.h
   - ```_IO``` means there's no parameters
   - ```_IOW``` means userland is writing and kernel is reading
