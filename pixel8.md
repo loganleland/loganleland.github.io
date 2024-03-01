@@ -195,8 +195,8 @@ static const struct file_operations kbase_fops = {
 | KBASE_IOCTL_STICKY_RESOURCE_UNMAP | Unmap a resource mapped which was previously permanently mapped | 30 | _IOW | struct kbase_ioctl_sticky_resource_unmap {<br>  __u64 count;<br>  __u64 address;<br>}; |
 | KBASE_IOCTL_MEM_FIND_GPU_START_AND_OFFSET | Find the start address of the GPU memory region for the given gpu address and the offset of that address into the region | 31 | _IOWR | union kbase_ioctl_mem_find_gpu_start_and_offset {<br>  struct {<br>    __u64 gpu_addr;<br>    __u64 size;<br>  } in;<br>  struct {<br>    __u64 start;<br>    __u64 offset;<br>  } out;<br>}; |
 | KBASE_IOCTL_HWCNT_SET | Values to set dummy the dummy counters to| 32 | _IOW | struct kbase_ioctl_hwcnt_values {<br>  __u64 data;<br>  __u32 size;<br>  __u32 padding;<br>}; |
-| KBASE_IOCTL_CINSTR_GWT_START | | 33 | _IO | |
-| KBASE_IOCTL_CINSTR_GWT_STOP | | 34 | _IO | |
+| KBASE_IOCTL_CINSTR_GWT_START | Start the GPU write tracking | 33 | _IO | |
+| KBASE_IOCTL_CINSTR_GWT_STOP | Stop the GPU write tracking | 34 | _IO | |
 | KBASE_IOCTL_CINSTR_GWT_DUMP | Used to collect all GPU write fault addresses | 35 | _IOWR | union kbase_ioctl_cinstr_gwt_dump {<br>  struct {<br>    __u64 addr_buffer;<br>    __u64 size_buffer;<br>    __u32 len;<br>    __u32 padding;<br>  } in;<br>  struct {<br>    __u32 no_of_addr_collected;<br>    __u8 more_data_available;<br>    __u8 padding[27];<br>  } out;<br>}; |
 | KBASE_IOCTL_MEM_EXEC_INIT | Initialise the EXEC_VA memory zone | 38 | _IOW | struct kbase_ioctl_mem_exec_init {<br>  __u64 va_pages;<br>}; |
 | KBASE_IOCTL_GET_CPU_GPU_TIMEINFO | Request zero or more types of cpu/gpu time (counter values) | 50 | _IOWR | union kbase_ioctl_get_cpu_gpu_timeinfo {<br>  struct {<br>    __u32 request_flags;<br>    __u32 paddings[7];<br>  } in;<br>  struct {<br>    __u64 sec;<br>    __u32 nsec;<br>    __u32 padding;<br>    __u64 timestamp;<br>    __u64 cycle_counter;<br>  } out;<br>}; |
