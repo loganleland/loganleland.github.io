@@ -140,7 +140,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 - GPU character device: ```/dev/mali0``` with permission 666
 - Mali Kernel Drivers, loaded based on [vendor_boot_modules.slider](./files/pixel8/vendor_boot_modules.slider.html) 
   - mali_kbase.ko: Handles requests from a corresponding user side library to perform GPU operations. This driver is not open source.
-  - mali_pixel.ko: TBD
+  - mali_pixel.ko: Built via [BUILD.bazel](https://android.googlesource.com/kernel/google-modules/gpu/+/refs/heads/android-gs-shusky-5.15-android14-d1/mali_pixel/)
 - Shusky git repo: ```google-modules/gpu``` provides file_operation structs / ioctl handler for interacting with ```mali_kbase.ko``` from userspace:
   - Clone the repo: git clone https://android.googlesource.com/kernel/google-modules/gpu
   - Checkout the shusky branch: git checkout android-gs-shusky-5.15-android14-d1
