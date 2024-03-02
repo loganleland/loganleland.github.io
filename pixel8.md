@@ -217,7 +217,9 @@ int main(void) {
 | Name | Description | Command ID | Data Direction | struct |
 | -    | -           | -          | -              | -      |
 | KBASE_IOCTL_SET_FLAGS | Set kernel context creation flags | 1 | _IOW | struct kbase_ioctl_set_flags {<br>  __u32 create_flags;<br>}; |
+| KBASE_IOCTL_JOB_SUBMIT | Submit jobs/atoms to the kernel | 2 | _IOW | struct kbase_ioctl_job_submit {<br>  __u64 addr;<br>  __u32 nr_atoms;<br>  __u32 stride;<br>}; |
 | KBASE_IOCTL_GET_GPUPROPS | Read GPU properties from the kernel | 3 | _IOW | struct kbase_ioctl_get_gpuprops {<br>  __u64 buffer;  <br>  __u32 size;<br>  __u32 flags;<br>}; |
+| KBASE_IOCTL_POST_TERM |  | 4 | _IO |  |
 | KBASE_IOCTL_MEM_ALLOC | Allocate memory on the GPU | 5 | _IOWR | union kbase_ioctl_mem_alloc {<br>  struct {<br>    __u64 va_pages;<br>    __u64 commit_pages;<br>    __u64 extension;<br>    __u64 flags;<br>  } in;<br>  struct {<br>    __u64 flags;<br>    __u64 gpu_va;<br>  } out;<br>}; |
 | KBASE_IOCTL_MEM_QUERY | Query properties of a GPU memory region | 6 | _IOWR | union kbase_ioctl_mem_query {<br>  struct {<br>    __u64 gpu_addr;<br>    __u64 query;<br>  } in;<br>  struct {<br>    __u64 value;<br>  } out;<br>}; |
 | KBASE_IOCTL_MEM_FREE | Free a memory region | 7 | _IOW | struct kbase_ioctl_mem_free {<br>  __u64 gpu_addr;<br>}; |
