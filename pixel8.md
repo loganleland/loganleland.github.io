@@ -146,7 +146,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
   - Checkout the shusky branch: git checkout android-gs-shusky-5.15-android14-d1
   - ioctl handler of interest is in ```mali_kbase/mali_kbase_core_linux.c``` with signature ```static long kbase_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)```
   - file_operations struct with ioctl handler for mali_kbase:
-```
+~~~ C
 static const struct file_operations kbase_fops = {
   .owner = THIS_MODULE,
   .open = kbase_open,
@@ -159,10 +159,11 @@ static const struct file_operations kbase_fops = {
   .check_flags = kbase_check_flags,
   .get_unmapped_area = kbase_get_unmapped_area,
 };
-```
-- Example code for opening ```/dev/mali0``` and sending an ioctl to retrieve version major and minor
+~~~
 
-```C
+- Example code for opening ```/dev/mali0``` and sending an ioctl to retrieve version
+
+~~~ C
 #include <dlfcn.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -206,9 +207,15 @@ int main(void) {
 
   return 0;
 }
-```
+~~~
   
-- List of ```KBASE_IOCTL_TYPE``` in gpu/common/include/uapi/gpu/arm/midgard/mali_kbase_ioctl.h
+- List of ```KBASE_IOCTL_TYPE``` in:
+  - gpu/common/include/uapi/gpu/arm/midgard/mali_kbase_ioctl.h
+  - gpu/common/include/uapi/gpu/arm/midgard/jm/mali_kbase_jm_ioctl.h
+  - common/include/uapi/gpu/arm/midgard/csf/mali_kbase_csf_ioctl.h
+ 
+where
+- ioctl data direction meaning:
   - ```_IO```: there's no parameters
   - ```_IOW```: userland is writing and kernel is reading
   - ```_IOR```: userland is reading and kernel is writing
