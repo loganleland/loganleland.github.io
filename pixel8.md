@@ -62,6 +62,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 - adb forward tcp:8022 tcp:8022
 - ssh localhost -p 8022
 - To copy a file from the phone to the host: ```scp u0_a265@192.168.1.121:/system/lib64/libvulkan.so .```
+- To copy a file from host to phone: ```scp -P 8022 ioctl.h u0_a265@localhost:/data/data/com.termux/files/home```
 
 #### Debug Host
 - If the following is seen:
@@ -140,7 +141,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 - GPU character device: ```/dev/mali0``` with permission 666
 - Mali Kernel Drivers, loaded based on [vendor_boot_modules.slider](./files/pixel8/vendor_boot_modules.slider.html) 
   - mali_kbase.ko: Handles requests from a corresponding user side library to perform GPU operations. This driver is not open source.
-  - mali_pixel.ko: TBD
+  - mali_pixel.ko: Built via [BUILD.bazel](https://android.googlesource.com/kernel/google-modules/gpu/+/refs/heads/android-gs-shusky-5.15-android14-d1/mali_pixel/)
 - Shusky git repo: ```google-modules/gpu``` provides file_operation structs / ioctl handler for interacting with ```mali_kbase.ko``` from userspace:
   - Clone the repo: git clone https://android.googlesource.com/kernel/google-modules/gpu
   - Checkout the shusky branch: git checkout android-gs-shusky-5.15-android14-d1
@@ -164,7 +165,6 @@ static const struct file_operations kbase_fops = {
 - Example code for opening ```/dev/mali0``` and sending an ioctl to retrieve version
 
 ~~~ C
-#include <dlfcn.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/ioctl.h>
