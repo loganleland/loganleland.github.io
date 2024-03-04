@@ -6,9 +6,12 @@ layout: default
 
 ## Pixel 8
 
+[The Rising Sea](https://ncatlab.org/nlab/show/The+Rising+Sea) A hard nut may be cracked not immediately by sheer punctual force, but eventually by gently immersing it into a whole body of water.
+
 ![binjadeath](./images/pixel8.png)
 
-
+- [Background](https://leland.zip/pixel8.html#background)
+- [Keeping up to date with Pixel 8 security](https://leland.zip/pixel8.html#keeping-up-to-date-with-pixel-8-security)
 - [Setup Environment](https://leland.zip/pixel8.html#setup-environment)
   - [Setup (rootless) Phone](https://leland.zip/pixel8.html#setup-rootless-phone)
   - [Setup Host](https://leland.zip/pixel8.html#setup-host)
@@ -23,12 +26,22 @@ layout: default
   - [Driver](https://leland.zip/pixel8.html#driver)
   - [Vulkan](https://leland.zip/pixel8.html#vulkan)
 
+
+## Background
+- [Android Universal Root: Exploiting Mobile GPU / Command Queue Drivers](https://www.youtube.com/watch?v=kEl5qbLZVeY)
+- [Bad io_uring: A New Era of Rooting for Android](https://i.blackhat.com/BH-US-23/Presentations/US-23-Lin-bad_io_uring-wp.pdf?_gl=1*164nll3*_gcl_au*MTAzODk3OTg4NC4xNzA5NTMwNTU5*_ga*ODQ1NjU1MzQ1LjE3MDk1MzA1NjA.*_ga_K4JK67TFYV*MTcwOTUzMDU1OS4xLjAuMTcwOTUzMDU1OS4wLjAuMA..&_ga=2.169786529.1236663164.1709530561-845655345.1709530560)
+- [DIFUZE: Android Kernel Driver Fuzzing](https://www.blackhat.com/docs/eu-17/materials/eu-17-Corina-Difuzzing-Android-Kernel-Drivers.pdf)
+- ioctl data direction meaning:
+  - ```_IO```: there's no parameters
+  - ```_IOW```: userland is writing and kernel is reading
+  - ```_IOR```: userland is reading and kernel is writing
+  - ```_IORW```: ```_IOW``` and ```_IOR```
+
 ## Keeping up to date with Pixel 8 security
 - Pixel Update (security) Bulletins. This comes out monthly [link](https://source.android.com/docs/security/bulletin/pixel)
 
-## Setup Environment
 
-[The Rising Sea](https://ncatlab.org/nlab/show/The+Rising+Sea) A hard nut may be cracked not immediately by sheer punctual force, but eventually by gently immersing it into a whole body of water.
+## Setup Environment
 
 George Hotz: You gotta spend time to setup your environment nice because once your environment is nice everything else is nice. 
 
@@ -125,6 +138,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 #### Loadable Kernel Modules
   This [link](https://source.android.com/docs/core/architecture/kernel/loadable-kernel-modules) introduces loadable kernel modules in Android.
 
+
 ### GPU
  
  The Pixel 8 uses ARM Immortalis-G715
@@ -209,16 +223,6 @@ int main(void) {
   return 0;
 }
 ~~~
-  
- 
-where
-- ioctl data direction meaning:
-  - ```_IO```: there's no parameters
-  - ```_IOW```: userland is writing and kernel is reading
-  - ```_IOR```: userland is reading and kernel is writing
-  - ```_IORW```: ```_IOW``` and ```_IOR```
-
-
 
 
 #### Vulkan
