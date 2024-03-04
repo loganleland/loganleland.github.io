@@ -164,7 +164,6 @@ static const struct file_operations kbase_fops = {
 - Example code for opening ```/dev/mali0``` and sending an ioctl to retrieve version
 
 ~~~ C
-#include <dlfcn.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/ioctl.h>
