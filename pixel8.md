@@ -139,7 +139,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 
 #### Driver
 - GPU character device: ```/dev/mali0``` with permission 666
-- ioctls in a single header file: [ioctl.h](./files/pixel8/gpu/ioctl.h)
+- ioctls in a single header file: [ioctl.h](./files/pixel8/gpu/ioctl.html)
 - Mali Kernel Drivers, loaded based on [vendor_boot_modules.slider](./files/pixel8/vendor_boot_modules.slider.html) 
   - mali_kbase.ko: Handles requests from a corresponding user side library to perform GPU operations. This driver is not open source.
   - mali_pixel.ko: Built via [BUILD.bazel](https://android.googlesource.com/kernel/google-modules/gpu/+/refs/heads/android-gs-shusky-5.15-android14-d1/mali_pixel/)
