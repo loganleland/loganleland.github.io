@@ -29,6 +29,7 @@ layout: default
 
 ## Background
 - [Android Universal Root: Exploiting Mobile GPU / Command Queue Drivers](https://www.youtube.com/watch?v=kEl5qbLZVeY)
+- [Make KSMA Great Again: The Art of Rooting Android Devices by GPU MMU Features](https://www.youtube.com/watch?v=2qkwSPnQqrU)
 - [Bad io_uring: A New Era of Rooting for Android](https://i.blackhat.com/BH-US-23/Presentations/US-23-Lin-bad_io_uring-wp.pdf?_gl=1*164nll3*_gcl_au*MTAzODk3OTg4NC4xNzA5NTMwNTU5*_ga*ODQ1NjU1MzQ1LjE3MDk1MzA1NjA.*_ga_K4JK67TFYV*MTcwOTUzMDU1OS4xLjAuMTcwOTUzMDU1OS4wLjAuMA..&_ga=2.169786529.1236663164.1709530561-845655345.1709530560)
 - [DIFUZE: Android Kernel Driver Fuzzing](https://www.blackhat.com/docs/eu-17/materials/eu-17-Corina-Difuzzing-Android-Kernel-Drivers.pdf)
 - ioctl data direction meaning:
