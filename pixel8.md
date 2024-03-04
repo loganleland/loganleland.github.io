@@ -12,6 +12,7 @@ layout: default
 
 - [Background](https://leland.zip/pixel8.html#background)
 - [Keeping up to date with Pixel 8 security](https://leland.zip/pixel8.html#keeping-up-to-date-with-pixel-8-security)
+- [Git Logs](https://leland.zip/pixel8.html#git-logs)
 - [Setup Environment](https://leland.zip/pixel8.html#setup-environment)
   - [Setup (rootless) Phone](https://leland.zip/pixel8.html#setup-rootless-phone)
   - [Setup Host](https://leland.zip/pixel8.html#setup-host)
@@ -28,6 +29,7 @@ layout: default
 
 
 ## Background
+- [Project Zero: First handset with MTE on the market](https://googleprojectzero.blogspot.com/2023/11/first-handset-with-mte-on-market.html)
 - [Android Universal Root: Exploiting Mobile GPU / Command Queue Drivers](https://www.youtube.com/watch?v=kEl5qbLZVeY)
 - [Make KSMA Great Again: The Art of Rooting Android Devices by GPU MMU Features](https://www.youtube.com/watch?v=2qkwSPnQqrU)
 - [Bad io_uring: A New Era of Rooting for Android](https://i.blackhat.com/BH-US-23/Presentations/US-23-Lin-bad_io_uring-wp.pdf?_gl=1*164nll3*_gcl_au*MTAzODk3OTg4NC4xNzA5NTMwNTU5*_ga*ODQ1NjU1MzQ1LjE3MDk1MzA1NjA.*_ga_K4JK67TFYV*MTcwOTUzMDU1OS4xLjAuMTcwOTUzMDU1OS4wLjAuMA..&_ga=2.169786529.1236663164.1709530561-845655345.1709530560)
@@ -40,6 +42,10 @@ layout: default
 
 ## Keeping up to date with Pixel 8 security
 - Pixel Update (security) Bulletins. This comes out monthly [link](https://source.android.com/docs/security/bulletin/pixel)
+
+## Git Logs
+- GPU: [log]([https://android.googlesource.com/kernel/google-modules/gpu/+log/refs/heads/android-gs-shusky-5.15-android14-d1](https://android.googlesource.com/kernel/google-modules/gpu/+log/refs/heads/android-gs-shusky-5.15-android14-qpr1))
+- Kernel device: [log]([https://android.googlesource.com/kernel/devices/google/shusky/+log/refs/heads/android-gs-shusky-5.15-android14-qpr1](https://android.googlesource.com/device/google/shusky-kernel/+log/refs/heads/master))
 
 
 ## Setup Environment
@@ -144,8 +150,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
  
  The Pixel 8 uses ARM Immortalis-G715
 
-- Google's shusky gpu git log: [log](https://android.googlesource.com/kernel/google-modules/gpu/+log/refs/heads/android-gs-shusky-5.15-android14-d1)
-- (some) Documentation: [developer arm docs](https://developer.arm.com/Processors/Immortalis-G715#Technical-Specifications)
+- (light) Documentation: [developer arm docs](https://developer.arm.com/Processors/Immortalis-G715#Technical-Specifications)
 
 #### Public Vulns
 - [CVE-2023-48409 / CVE-2023-48421](https://nvd.nist.gov/vuln/detail/CVE-2023-48409): In gpu_pixel_handle_buffer_liveness_update_ioctl of private/google-modules/gpu/mali_kbase/mali_kbase_core_linux.c, there is a possible out of bounds write due to an integer overflow. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.
@@ -158,11 +163,12 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 - Mali Kernel Drivers, loaded based on [vendor_boot_modules.slider](./files/pixel8/vendor_boot_modules.slider.html) 
   - mali_kbase.ko: Handles requests from a corresponding user side library to perform GPU operations. This driver is not open source.
   - mali_pixel.ko: Built via [BUILD.bazel](https://android.googlesource.com/kernel/google-modules/gpu/+/refs/heads/android-gs-shusky-5.15-android14-d1/mali_pixel/)
-- Shusky git repo: ```google-modules/gpu``` provides file_operation structs / ioctl handler for interacting with ```mali_kbase.ko``` from userspace:
+- Shusky git repo: ```google-modules/gpu``` provides file_operation structs / ioctl handler for interacting with ```/dev/mali0``` from userspace:
   - Clone the repo: git clone https://android.googlesource.com/kernel/google-modules/gpu
   - Checkout the shusky branch: git checkout android-gs-shusky-5.15-android14-d1
   - ioctl handler of interest is in ```mali_kbase/mali_kbase_core_linux.c``` with signature ```static long kbase_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)```
   - file_operations struct with ioctl handler for mali_kbase:
+  
 ~~~ C
 static const struct file_operations kbase_fops = {
   .owner = THIS_MODULE,
