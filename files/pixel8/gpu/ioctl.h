@@ -1,4 +1,3 @@
-<pre>
 #include <sys/ioctl.h>
 
 // Type number
@@ -1253,4 +1252,3 @@ struct kbase_ioctl_buffer_liveness_update {
   _IOW(KBASE_IOCTL_TYPE, 66, struct kbase_ioctl_apc_request)
 #define KBASE_IOCTL_BUFFER_LIVENESS_UPDATE \
   _IOW(KBASE_IOCTL_TYPE, 67, struct kbase_ioctl_buffer_liveness_update)
-</pre>
