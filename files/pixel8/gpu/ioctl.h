@@ -1,3 +1,19 @@
+/* 
+ * This program is free software and is provided to you under the terms of the
+ * GNU General Public License version 2 as published by the Free Software
+ * Foundation, and any use by you of this program is subject to the terms
+ * of such GNU license.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+ */
+
 #include <sys/ioctl.h>
 
 // Type number
@@ -1126,8 +1142,6 @@ struct kbase_ioctl_buffer_liveness_update {
 };
 
 
-//#define KBASE_IOCTL_VERSION_CHECK \
-//  _IOWR(KBASE_IOCTL_TYPE, 0, struct kbase_ioctl_version_check)
 #define KBASE_IOCTL_SET_FLAGS \
   _IOW(KBASE_IOCTL_TYPE, 1, struct kbase_ioctl_set_flags)
 #define KBASE_IOCTL_JOB_SUBMIT \
