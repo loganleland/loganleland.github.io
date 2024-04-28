@@ -1,27 +1,17 @@
-/* 
- * This program is free software and is provided to you under the terms of the
- * GNU General Public License version 2 as published by the Free Software
- * Foundation, and any use by you of this program is subject to the terms
- * of such GNU license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, you can access it online at
- * http://www.gnu.org/licenses/gpl-2.0.html.
- */
-
 #include <sys/ioctl.h>
 
 // Type number
 #define KBASE_IOCTL_TYPE 0x80
 
+/* Enable KBase tracepoints for CSF builds */
+#define BASE_TLSTREAM_ENABLE_CSF_TRACEPOINTS (1 << 2)
+
+/* Enable additional CSF Firmware side tracepoints */
+#define BASE_TLSTREAM_ENABLE_CSFFW_TRACEPOINTS (1 << 3)
+
 typedef __u8 base_kcpu_queue_id; /* We support up to 256 active KCPU queues */
 
-/*
+/**
  * struct kbase_ioctl_version_check - Check version compatibility between
  * kernel and userspace
  *
@@ -32,7 +22,6 @@ struct kbase_ioctl_version_check {
   __u16 major;
   __u16 minor;
 };
-
 
 /**
  * struct kbase_ioctl_set_flags - Set kernel context creation flags
@@ -1142,6 +1131,50 @@ struct kbase_ioctl_buffer_liveness_update {
 };
 
 
+/**
+ * enum kbase_pixel_gpu_slc_liveness_mark_type - Determines the type of a live range mark
+ *
+ * @KBASE_PIXEL_GPU_LIVE_RANGE_BEGIN: Signifies that a mark is the start of a live range
+ * @KBASE_PIXEL_GPU_LIVE_RANGE_END:   Signifies that a mark is the end of a live range
+ *
+ */
+enum kbase_pixel_gpu_slc_liveness_mark_type {
+  KBASE_PIXEL_GPU_LIVE_RANGE_BEGIN,
+  KBASE_PIXEL_GPU_LIVE_RANGE_END,
+};
+
+/**
+ * struct kbase_pixel_gpu_slc_liveness_mark - Live range marker
+ *
+ * @type: See @struct kbase_pixel_gpu_slc_liveness_mark_type
+ * @index: Buffer index (within liveness update array) that this mark represents
+ *
+ */
+struct kbase_pixel_gpu_slc_liveness_mark {
+  __u32 type : 1;
+  __u32 index : 31; 
+};
+
+
+/**
+ * struct gpu_slc_liveness_update_info - Buffer info, and live ranges
+ *
+ * @buffer_va:         Array of buffer base virtual addresses
+ * @buffer_sizes:      Array of buffer sizes
+ * @live_ranges:       Array of &struct kbase_pixel_gpu_slc_liveness_mark denoting live ranges for
+ *                     each buffer
+ * @live_ranges_count: Number of elements in the live ranges buffer
+ */
+struct gpu_slc_liveness_update_info {
+  __u64* buffer_va;
+  __u64* buffer_sizes;
+  struct kbase_pixel_gpu_slc_liveness_mark* live_ranges;
+  __u64 live_ranges_count;
+};
+
+
+//#define KBASE_IOCTL_VERSION_CHECK \
+//  _IOWR(KBASE_IOCTL_TYPE, 0, struct kbase_ioctl_version_check)
 #define KBASE_IOCTL_SET_FLAGS \
   _IOW(KBASE_IOCTL_TYPE, 1, struct kbase_ioctl_set_flags)
 #define KBASE_IOCTL_JOB_SUBMIT \
