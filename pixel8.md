@@ -81,7 +81,7 @@ George Hotz: You gotta spend time to setup your environment nice because once yo
 #### On Host
 - adb forward tcp:8022 tcp:8022
 - ssh localhost -p 8022
-- To copy a file from the phone to the host: ```-P 8022 u0_a265@127.0.0.1:/system/lib64/libvulkan.so .```
+- To copy a file from the phone to the host: ```scp u0_a265@192.168.0.1:/system/lib64/libvulkan.so .```
 - To copy a file from host to phone: ```scp -P 8022 ioctl.h u0_a265@localhost:/data/data/com.termux/files/home```
 
 Function I put in my bashrc
