@@ -6,7 +6,7 @@ layout: default
 
 ## Snippets
 
-![binjadeath](./images/pixel8.png)
+![artistic](./images/snippets.png)
 
 
 - [Tracing a program](https://leland.zip/snippets.html#trace-program)
