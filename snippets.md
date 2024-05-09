@@ -13,10 +13,19 @@ layout: default
 
 ## Trace Program
 
-gcc has a flag ```-finstrument-functions``` which instruments the resultant binary with a call
-upon function entry and another call upon function exit.
+gcc has a flag ```-finstrument-functions``` which instruments the resultant binary:
+- with a call upon function entry ```__cyg_profile_func_enter```
+- with another call upon function exit ```__cyg_profile_func_exit```
 
-You can hook these instrumented functions like this:
+
+The below images show the same local function without and with ```-finstrument-functions``` in arm64:
+
+![pre-instrument](./images/pre-function-instrument.png)
+*Local function without -finstrument-functions*
+
+![post-instrument](./images/post-function-instrument.png)
+*Local function with -finstrument-functions*
+
 
 ### Hook
 ```
