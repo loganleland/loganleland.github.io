@@ -31,7 +31,7 @@ The below images show the same local function without and with ```-finstrument-f
 ```
 #include  <stdio.h>
 
-void __cyg_profile_func_enter(void* funcAddr, void* callSite) {
+void __cyg_profile_func_enter(void *funcAddr, void *callSite) {
   printf("ENTER: %p, from %p\n", funcAddr, callSite);
 }
 
