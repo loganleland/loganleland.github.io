@@ -22,11 +22,11 @@ You can hook these instrumented functions like this:
 ```
 #include  <stdio.h>
 
-void __cyg_profile_func_enter (void* funcAddr, void* callSite) {
+void __cyg_profile_func_enter(void* funcAddr, void* callSite) {
   printf("ENTER: %p, from %p\n", funcAddr, callSite);
 }
 
-void __cyg_profile_func_exit (void *funcAddr, void *callSite) {
+void __cyg_profile_func_exit(void *funcAddr, void *callSite) {
   printf("EXIT: %p, from %p\n", funcAddr, callSite);
 }
 ```
