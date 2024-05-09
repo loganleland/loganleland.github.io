@@ -20,11 +20,11 @@ gcc has a flag ```-finstrument-functions``` which instruments the resultant bina
 
 The below images show the same local function without and with ```-finstrument-functions``` in arm64:
 
+### Local arm64 function without -finstrument-functions
 ![pre-instrument](./images/pre-function-instrument.png)
-*Local function without -finstrument-functions*
 
+### Local arm64 function with -finstrument-functions
 ![post-instrument](./images/post-function-instrument.png)
-*Local function with -finstrument-functions*
 
 
 ### Hook
