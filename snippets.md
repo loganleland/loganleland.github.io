@@ -13,10 +13,11 @@ layout: default
 
 ## Trace Program
 
-gcc has a flag ```-finstrument-functions``` which instruments the resultant binary:
-- with a call upon function entry ```__cyg_profile_func_enter```
-- with another call upon function exit ```__cyg_profile_func_exit```
+The gcc flag ```-finstrument-functions``` instruments a binary with two functions:
+- Call to ```__cyg_profile_func_enter``` after every compiled function prologue
+- Call to ```__cyg_profile_func_exit``` before every compiled function epilogue
 
+for linux targets.
 
 The below images show the same local function without and with ```-finstrument-functions``` in arm64:
 
@@ -28,6 +29,9 @@ The below images show the same local function without and with ```-finstrument-f
 
 
 ### Hook
+
+The instrumented calls can be hooked for the purposes of reverse engineering, vuln research and performance profiling.
+
 ```
 #include  <stdio.h>
 
@@ -44,7 +48,7 @@ Can be compiled: ```gcc -shared -g hook.c -o hook.so```
 
 ### Compile program of interest
 
-```gcc -fno-pie -no-pie -g -finstrument-functions main.c -lm -o main```
+```gcc -fno-pie -no-pie -g -finstrument-functions main.c -o main```
 
 ### LD_PRELOAD
 ``` LD_PRELOAD=/home/leland/function_instrumentation/hook.so ./main``` 
