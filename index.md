@@ -12,3 +12,4 @@ I'm a vulnerability researcher with a focus on embedded linux systems. I'm curre
 - [Reading List](./reading-list.html)
 - [Pixel 8 REsearch](./pixel8.html)
 - [Snippets](./snippets.html)
+- [Config](./conf.html)
