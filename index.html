@@ -21,19 +21,98 @@
         text-decoration: none;
         font-size: 130%;
       }
-    </style>
+    .glow-on-hover {
+      width: 130px;
+      height: 50px;
+      border: none;
+      outline: none;
+      color: #fff;
+      background: #111;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 10px;
+    }
+
+    .glow-on-hover:before {
+      content: '';
+      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+      position: absolute;
+      top: -2px;
+      left:-2px;
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      animation: glowing 20s linear infinite;
+      opacity: 0;
+      transition: opacity .3s ease-in-out;
+      border-radius: 10px;
+    }
+
+    .glow-on-hover:active {
+      color: #000
+    }
+
+    .glow-on-hover:active:after {
+      background: transparent;
+    }
+
+  .glow-on-hover:hover:before {
+      opacity: 1;
+    }
+
+    .glow-on-hover:after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #111;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+    }
+
+    @keyframes glowing {
+      0% { background-position: 0 0; }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    .left-center {
+      text-align: center; 
+    }
+     </style>
   </head>
   <body>
 
   <h1>leland.zip</h1>
   <img src="./images/pfp.png" alt="profile picture, my face roughly" style="width:30%;height:30%;">
-  <p> Recreational vulnerability research</p>
-  My open-source software is available on <a href="https://github.com/loganleland">[github]</a>
+  <p> Vulnerability research</p>
   <br>
-  ----------
-  <a href="https://leland.zip/blog.html">[blog]</a> &nbsp;
-  <a href="https://leland.zip/favorites.html">[favorites]</a> &nbsp;
-  <a href="https://leland.zip/contact.html">[contact]</a>
-  ----------
+
+  <a href="https://leland.zip/blog.html"><button class="glow-on-hover">blog</button></a> &nbsp;
+  <a href="https://leland.zip/favorites.html"><button class="glow-on-hover">favorites</button></a> &nbsp;
+  <a href="https://github.com/loganleland"><button class="glow-on-hover">open-source</button></a> &nbsp;
+  <a href="https://leland.zip/contact.html"><button class="glow-on-hover">contact</button></a>
+
+  <br> <br> <br>
+
+  <hr style="width:500px">
+  some guiding principles: Rising Sea
+  <hr style="width:500px">
+  <div class=left-center>
+  <br>
+  Development of general abstract theory eventually brings <br>
+  with it effortless solutions to concrete particular problems.
+  <br> <br>
+  A hard nut may be cracked not immediately by sheer punctual force, <br>
+  but eventually by gently immersing it into a whole body of water.
+
+  <a href="https://ncatlab.org/nlab/show/The+Rising+Sea"><button class="glow-on-hover" style="width:50px;height:25px">nlab</button></a>
+  </div>
   </body>
+
 </html> 
