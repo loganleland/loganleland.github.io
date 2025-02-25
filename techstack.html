@@ -94,6 +94,7 @@
     .buttonHome {width: 260px;}
     .buttonMedium {width: 270px;}
     .buttonWide {width: 330px;}
+    .buttonTall {height: 100px;}
 
      </style>
   </head>
@@ -107,11 +108,25 @@
   <div>
   <h2>Static Analysis</h2>
     <h3><button class="glow-on-hover"><a href="https://binary.ninja/">Binary Ninja</a></button></h3>
-    Binary ninja (binja) provides a comfortable static analysis platform of binaries due to its api and intermediate language design.
+    Binary ninja (binja) provides a comfortable automated/manual static analysis <br>
+    platform for binaries due to its api and intermediate language design.
 
     <h3><button class="glow-on-hover"><a href="https://frama-c.com/">Frama-C</a></button></h3>
     I've had a lot of success using Frama-C to analyze C code with its many plugins such as Eva, WP, and E-ACSL.
-  </body>
+
+    <h3><button class="glow-on-hover"><a href="https://github.com/Vector35/tanto">Tantō</a></button></h3>
+    Interactively create slices to improve static RE in binja.
+
+    <h3><button class="glow-on-hover"><a href="https://github.com/Vector35/warp">Warp</a></button></h3>
+    Identify common functions within any binary efficiently and accurately.
+
+    <h3><button class="glow-on-hover"><a href="https://github.com/google/binexport">Binexport</a></button></h3>
+    I use binexport to create protocol buffers from binja that can be consumed by bindiff.
+
+    <h3><button class="glow-on-hover"><a href="https://github.com/google/bindiff">Bindiff</a></button></h3>
+    I use bindiff to do patch analysis for understanding how post-exploit code <br>
+    needs updated and to recover patched vulns.
+
   </div>
 
   <div>
@@ -140,7 +155,8 @@
     I use termux and adb which provides a nice way to ssh over usb. <br>
     This provides a shell with clang and python to quickly interact with userspace drivers.
     <h3><button class="glow-on-hover"><a href="https://termux.dev/en/">Termux</a></button></h3>
+    <h3><button class="buttonTall glow-on-hover"><a href="https://developer.android.com/tools/adb">Android Debug Bridge</a></button></h3>
   </div>
 
-
+  </body>
 </html> 
