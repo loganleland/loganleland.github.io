@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>leland.zip</title>
+  <title>Tech</title>
     <style>
       body {
         background-color: #000; /* Black background */
@@ -11,9 +11,128 @@
         padding: 15px;
         text-align: center;
       }
-    </style>
+      p {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 130%;
+      }
+      a {
+        color: #00ff00; /* Green links */
+        text-decoration: none;
+        font-size: 130%;
+      }
+    .glow-on-hover {
+      width: 160px;
+      height: 50px;
+      border: none;
+      outline: none;
+      color: #fff;
+      background: #111;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 15px;
+      box-sizing: border-box;
+      font-size: 102%;
+    }
+
+    .glow-on-hover:before {
+      content: '';
+      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+      position: absolute;
+      top: -2px;
+      left:-2px;
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      animation: glowing 20s linear infinite;
+      opacity: 0;
+      transition: opacity .3s ease-in-out;
+      border-radius: 10px;
+    }
+
+    .glow-on-hover:active {
+      color: #000
+    }
+
+    .glow-on-hover:active:after {
+      background: transparent;
+    }
+
+  .glow-on-hover:hover:before {
+      opacity: 1;
+    }
+
+    .glow-on-hover:after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #111;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+    }
+
+    @keyframes glowing {
+      0% { background-position: 0 0; }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    div {
+      padding: 10px;
+      width: 50%;
+      border: 5px solid gray;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .buttonHome {width: 260px;}
+    .buttonMedium {width: 270px;}
+    .buttonWide {width: 330px;}
+
+     </style>
   </head>
   <body>
-    Loading...
+
+  <h1><button class="buttonHome glow-on-hover"><a href="https://leland.zip">leland.zip</a></button></h1>
+  <img src="./images/techstack.png" alt="binja <3" style="width:30%;height:30%;">
+  <p> Tech used for auditing code </p>
+  <br>
+
+  <div>
+  <h2>Static Analysis</h2>
+    <h3><button class="glow-on-hover"><a href="https://binary.ninja/">Binary Ninja</a></button></h3>
+    Binary ninja (binja) provides a comfortable static analysis platform of binaries due to its api and intermediate language design.
+
+    <h3><button class="glow-on-hover"><a href="https://frama-c.com/">Frama-C</a></button></h3>
+    I've had a lot of success using Frama-C to analyze C code with its many plugins such as Eva, WP and E-ACSL.
   </body>
-</html>
+  </div>
+
+  <div>
+  <h2> Sanitizers </h2>
+    The following sanitizers work well with access to C/C++ source code. <br>
+    After compiling with these sanitizers the resulting executable will log any detected errors. <br>
+    LLVM supports these sanitizers with gcc support slowly rolling in. 
+    <h3><button class="buttonMedium glow-on-hover"><a href="https://github.com/google/sanitizers/wiki/AddressSanitizer">AddressSanitizer</a></button></h3>
+    <h3><button class="buttonMedium glow-on-hover"><a href="https://github.com/google/sanitizers/wiki/MemorySanitizer">MemorySanitizer</a></button></h3>
+    <h3><button class="buttonWide glow-on-hover"><a href="https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html">UndefinedBehaviorSanitizer</a></button></h3>
+  </div>
+
+  <div>
+  <h2>Property Based Testing</h2>
+    Many languages have property based testing support which can be used to specify <br>
+    correctness then generate test cases in a variety of ways. <br>
+    This pairs well with sanitizers.
+
+    <h3><button class="glow-on-hover"><a href="https://github.com/trailofbits/deepstate">Deepstate</a></button></h3>
+    <h3><button class="glow-on-hover"><a href="https://hackage.haskell.org/package/QuickCheck">QuickCheck</a></button></h3>
+    <h3><button class="glow-on-hover"><a href="https://github.com/QuickChick/QuickChick">QuickChick</a></button></h3>
+  </div>
+
+</html> 
