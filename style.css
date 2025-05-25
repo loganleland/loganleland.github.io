@@ -43,7 +43,7 @@ nav {
 }
 
 .logo {
-  font-size: 1.25rem;
+  font-size: 1.7rem;
   font-weight: 600;
   color: var(--text-primary);
   text-decoration: none;
@@ -56,14 +56,14 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 2.2rem;
   list-style: none;
 }
 
 .nav-links a {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 1.7rem;
   transition: color 0.3s ease;
   position: relative;
 }
