@@ -49,14 +49,15 @@
       <div class="article-content">
         <h1 id="setup">Setup</h1> <p></p>
         <h2 id="purchase">Purchase</h2> 
-          <p> The following is written with a pixel 9 bought from the google store without financing. There are often deals when buying for use with google fi however the phone needs an active google fi service.</p>
+          <p> The following is written with a pixel 9 bought from the google store without financing. Do not unlock the bootloader or root your personal use cellphone. Unlocking the bootloader will erase data on the pixel 9 and if done incorrectly and brick the device.</p>
           <ul>
             <li> Buying from sources other than Google can block easy unlocking of the bootloader.</li>
             <li> It has been reported Verizon disallows unlocking the bootloader of financed pixel 9 and when paid off will make you jump through additional actions for unlocking the bootloader.
             <li>Note that carrier locking is different than bootloader locking</li>
           </ul>
 
-          <p>If you don't already have a cable to connect the pixel to a laptop/desktop I would suggest the 4-1 100W cable from xcool since it can connect to all common kinds of ports. Depending on your use case the mission darkness window charge and shield faraday bag works well.</p>
+          <p>If you don't already have a cable to connect the pixel to a laptop/desktop I would suggest the 4-1 100W cable from xcool since it can connect to all common kinds of USB ports.</p>
+          <p>Depending on your use case the mission darkness window charge and shield faraday bag works well.</p>
           <p>The pixel 9 has a variety of RF attack surface and can be interesting to reverse engineer. While there's cheaper ways to go about this one option is to use a B205 mini from Ettus Research.</p>
         <ul>
           <li> https://store.google.com/product/pixel_9 </li>
@@ -67,7 +68,59 @@
 
 
          <h2 id="bootloader">Bootloader</h2> 
-          <p> After unboxing the fresh pixel 9 I suggest updating to the latest software.</p>
+          <p> Unlocking the bootloader can provide the following:</p>
+          <ul>
+            <li>Obtain root with Magisk</li>
+            <li>Downgrade to older software to develop against known vulns</li>
+            <li>Rewrite kernel / vendor code for various purposes</li>
+            <li>Recover from future bootloops</li>
+          </ul>
+
+          <p> 1. Enable developer mode: </p>
+          <ul>
+            <li>Settings -> About Phone</li>
+            <li>Click on Build Number until developer mode is enabled</li>
+            <li>Confirm pin/passcode if needed</li>
+            <li>If you have a pin it will be requested</li>
+            <li>A popup message "You are now a developer!" should appear</li>
+          </ul>        
+
+        <p> 2. Enable OEM unlocking </p>
+        <ul>
+          <li>Settings -> Developer Options</li>
+          <li>Click: OEM unlocking</li>
+          <li>Confirm pin/passcode if needed</li>
+          <li>Enable: Allow OEM unlocking </li>
+        </ul>
+
+        <p> 3. Install fastboot on a laptop/desktop</p>
+
+        <p> 4. Reboot device into fast boot mode </p>
+        <ul>
+          <li>Restart device</li>
+          <li>Hold volume down during restart process</li>
+          <li>Fastboot menu should now be visible</li>
+        </ul>
+
+        <p> 5. Fastboot unlock </p>
+        <div class="callout">
+          <p>This step will erase data on pixel 9</p>
+        </div>
+        <ul>
+          <li> Connect device via usb to laptop </li>
+          <li> On laptop execute: fastboot devices</li>
+          <li> Ensure fastboot devices outputs a serial number. If blank there's a usb error most likely</li>
+          <li> On laptop execute: fastboot flashing unlock</li>
+          <li> Pixel 9 screen should display a warning regarding unlocking the bootloader </li>
+          <li> Use volume buttons to change from "Do not unlock the bootloader" to "Unlock the bootloader"</li>
+          <li> Press power button to trigger a a reboot</li>
+          <li> Debug menu should have "Device state: unlocked"</li>
+          <li> Press power button with option "Start"</li>
+        </ul>
+
+        <p> Each restart will display a warning regarding the bootloader being unlocked. Fastboot can be used to lock the bootloader.</p>
+        <li> https://android.googlesource.com/platform/system/core/+/master/fastboot </li>
+ 
         <h2 id="root">Root</h2> 
         <h2 id="host-setup">Host Setup</h2> 
       </div>
