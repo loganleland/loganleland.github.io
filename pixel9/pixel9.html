@@ -55,7 +55,7 @@
             <li>Note that carrier locking is different than bootloader locking</li>
           </ul>
 
-          <p>If you don't already have a cable to connect the pixel to a laptop/desktop I would suggest the 4-1 100W cable from xcool since it can connect to all common kinds of USB ports.</p>
+          <p>If you don't already have a cable to connect the pixel to a laptop I would suggest the 4-1 100W cable from xcool since it can connect to all common kinds of USB ports.</p>
           <p>Depending on your use case the mission darkness window charge and shield faraday bag works well.</p>
           <p>The pixel 9 has a variety of RF attack surface and can be interesting to reverse engineer. While there's cheaper ways to go about this one option is to use a B205 mini from Ettus Research.</p>
         <ul>
@@ -193,7 +193,7 @@
         </ul>
 
         <p> 11. Flash patched init_boot.img </p>
-        <li> Execute on laptop: fastboot flash init_boot /path/to/patched/init_boot.img</li>
+        <li> Execute on laptop: fastboot flash init_boot /path/to/patched_init_boot.img</li>
         <pre data-language="bash"><code>leland@light:~/Downloads/$ fastboot flash init_boot ./magisk_patched-29000_oMsIj.img 
 Sending 'init_boot_a' (8192 KB)                    OKAY [  0.364s]
 Writing 'init_boot_a'                              OKAY [  0.074s]

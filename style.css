@@ -487,7 +487,7 @@ h2 {
 
         /* Article Header */
         .article-header {
-            max-width: var(--max-width-content);
+            max-width: 90ch;
             margin: 0 auto 4rem;
             text-align: center;
         }
@@ -515,7 +515,7 @@ h2 {
 
         /* Article Content Styles */
         .article-content {
-            max-width: var(--max-width-content);
+            max-width: 90ch;
             margin: 0 auto;
         }
 
