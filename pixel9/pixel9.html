@@ -51,7 +51,7 @@
           <p> The following is written with a pixel 9 bought from the google store without financing. Do not unlock the bootloader or root your personal use cellphone. Unlocking the bootloader will erase data on the pixel 9 and if done incorrectly and brick the device.</p>
           <ul>
             <li> Buying from sources other than Google can block easy unlocking of the bootloader.</li>
-            <li> It has been reported Verizon disallows unlocking the bootloader of financed pixel 9 and when paid off will make you jump through additional actions for unlocking the bootloader.
+            <li> It has been reported Verizon disallows unlocking the bootloader of financed pixel 9 and when paid off will require you take additional actions for unlocking the bootloader.
             <li>Note that carrier locking is different than bootloader locking</li>
           </ul>
 
@@ -79,7 +79,6 @@
           <ul>
             <li>Settings -> About Phone</li>
             <li>Click on Build Number until developer mode is enabled</li>
-            <li>A popup message "You are now a developer!" should appear</li>
           </ul>        
 
         <p> 2. Enable OEM unlocking </p>
@@ -104,22 +103,21 @@
         </div>
         <ul>
           <li> Connect device via usb to laptop </li>
-          <li> On laptop execute: fastboot devices</li>
-          <li> Ensure fastboot devices outputs a serial number. If blank there's a usb error most likely</li>
+          <li> On laptop execute: fastboot devices; ensure serial number is in stdout</li>
           <li> On laptop execute: fastboot flashing unlock</li>
           <li> Pixel 9 screen should display a warning regarding unlocking the bootloader </li>
-          <li> Use volume buttons to change from "Do not unlock the bootloader" to "Unlock the bootloader"</li>
+          <li> Use volume buttons to change: "Do not unlock the bootloader" to "Unlock the bootloader"</li>
           <li> Press power button to trigger a a reboot</li>
-          <li> Debug menu should have "Device state: unlocked"</li>
-          <li> Press power button with option "Start"</li>
+          <li> Debug menu should show: Device state: unlocked</li>
+          <li> Press power button with option: Start</li>
         </ul>
 
         <p> Each restart will display a warning regarding the bootloader being unlocked. Fastboot can be used to lock the bootloader.</p>
         <li> https://android.googlesource.com/platform/system/core/+/master/fastboot </li>
  
         <h2 id="root">Root</h2> 
-        <p>With the bootloader unlocked Magisk can be used to provide root access.<p>
-        <p> 1. Record the build number to download correct images</p>
+        <p>With the bootloader unlocked Magisk can be used to provide root.<p>
+        <p> 1. Record the build number to download correct factory image.</p>
         <ul>
           <li> Settings -> About Phone</li>
           <li> Scroll to bottom </li>
@@ -139,14 +137,12 @@
           <li> "tegu" for Pixel 9a </li>
         </ul>
 
-        <p> In the images site I locate <b>tokay</b> for the pixel 9 then find the correct build number from the previous step <b>BP1A.250505.005</b>. For my case the link to download is https://dl.google.com/dl/android/aosp/tokay-bp1a.250505.005-factory-5e869188.zip</p>
         <p> Take note of image variants for Verizon, DTAG, TW, EMEA, T-Mobile and Telestra. You don't want to mix and match variants (don't flash a Verizon variant if you didn't buy the pixel 9 from verizon).</p>
 
-        <p> 3. After downloading the image check the hash matches. This helps reduce ensure the correct image will be used (reduce chance of bricking your pixel).</p>
-        <pre data-language="bash"><code>leland@light:~/Downloads$ sha256sum tokay-bp1a.250505.005-factory-5e869188.zip 
-5e8691883c5004c15b72ab941533a44f164b2b6bdbf8393c8987da42ec31bbd8  tokay-bp1a.250505.005-factory-5e869188.zip
-        </code></pre>
-
+        <p> 3. After downloading the image check the sha256 hash matches.</p>
+        <div class="callout">
+          <p>If the hash doesn't match you will likely brick your device</p>
+        </div>
         <p> 4. Extract init_boot.img from factory image on laptop</p>
         <ul>
           <li>unzip tokay-bp1a.250505.005-factory-5e869188.zip</li>
@@ -156,11 +152,7 @@
 
         <p> 5. Download Magisk </p>
         <li>Download the latest apk from https://github.com/topjohnwu/Magisk/releases</li>
-
         <p> 6. Connect and Enable USB File Transfer.</p>
-        <li> Connect pixel device to laptop</li>
-        <li> On the pixel: Settings -> USB Preferences</li>
-        <li> Select File transfer / Android Auto</li>
         <li> Move init_boot.img to Download folder of pixel's internal storage</li>
         <li> Move Magisk apk to Download folder of pixel's internal storage</li>
 
@@ -171,8 +163,8 @@
         <p> 8. Patch init_boot.img from Magisk </p>
         <ul>
         <li> Execute Magisk: Install </li>
-        <li> Select: Select and Patch a File</li>
-        <li> Select: init_boot.img. Ensure this file is from correct build otherwise the pixel will be bricked in later steps</li>
+        <li> Select and Patch a File</li>
+        <li> Select: init_boot.img (if init_boot.img is incorrect device will be bricked after flashing)</li>
         <li> Select: LET'S GO</li>
         <li> A newly created <b>magisk_patched-29000_oMslj.img</b> should be created next to init_boot.img on the pixel</li>
         <li> Transfer <b>magisk_patched-29000_oMslj.img</b> to your laptop</li>
@@ -185,9 +177,8 @@
 
         <p> 10. Reboot into bootloader </p>
         <ul>
-          <li> Trust laptop for usb debugging </li>
           <li> Execute on laptop: adb devices</li>
-          <li> Ensure pixel is seen by previous command</li>
+          <li> A single device (your pixel phone) should be listed from previous command </li>
           <li> Execute on laptop: adb reboot bootloader</li>
           <li> Pixel should restart into fastboot mode</li>
         </ul>
@@ -208,9 +199,7 @@ Finished. Total time: 0.442s
         <p> 1. Install Termux. Download the latest non-beta release for arm64 from https://github.com/termux/termux-app/releases </p>
         <p> 2. Execute in Termux: su </p>
         <p> 3. Magisk prompt will appear: grant termux superuser priv </p>
-
       </div>
     </article>
-
 </body>
 </html>
