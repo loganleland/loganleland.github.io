@@ -33,10 +33,10 @@
                 </li>
                 
                 <li class="toc-item">
-                    <a href="#gpu" class="toc-link">Userspace Drivers</a>
+                    <a href="#drivers" class="toc-link">Userspace Drivers</a>
                     <ul class="toc-nested">
                         <li class="toc-item">
-                            <a href="#gpu" class="toc-link">GPU</a>
+                            <a href="#device-files" class="toc-link">Device Files</a>
                         </li>
                     </ul>
                 </li>
@@ -132,13 +132,13 @@
         </div>
 
         <p> <font color="#54ffb2">2.</font> Obtain a factory image from https://developers.google.com/android/images for your device/build number.</p>
-        <p> Each variant of the pixel devices has a codename: </p>
+        <p> Links to each factory image for each variant of the pixel devices: </p>
         <ul>
-          <li> "tokay" for Pixel 9 </li>
-          <li> "komodo" for Pixel 9 Pro XL </li>
-          <li> "caiman" for Pixel 9 Pro </li>
-          <li> "comet" for Pixel 9 Pro Fold </li>
-          <li> "tegu" for Pixel 9a </li>
+          <li><a href="https://developers.google.com/android/images#tokay">tokay aka Pixel 9</a></li>
+          <li><a href="https://developers.google.com/android/images#komodo">komodo aka Pixel 9 Pro XL</a></li>
+          <li><a href="https://developers.google.com/android/images#caiman">caiman aka Pixel 9 Pro</a></li>
+          <li><a href="https://developers.google.com/android/images#comet">comet aka Pixel 9 Pro Fold</a></li>
+          <li> <a href="https://developers.google.com/android/images#tegu">tegu for Pixel 9a</a></li>
         </ul>
 
         <p> Take note of image variants for Verizon, DTAG, TW, EMEA, T-Mobile and Telestra. You don't want to mix and match variants (don't flash a Verizon variant if you didn't buy the pixel 9 from verizon).</p>
@@ -219,8 +219,10 @@ Finished. Total time: 0.442s
           <li>Execute in Termux: sshd</li>
           <li>Execute on laptop: adb forward tcp:8022 tcp:8022</li>
           <li>Execute on laptop: ssh -p 8022 localhost</li>
-        </ul> 
+        </ul>
 
+        <h1 id="drivers">Userspace drivers</h1> <p></p>
+        <h2 id="device-files">Device Files</h2>
       </div>
     </article>
 </body>
