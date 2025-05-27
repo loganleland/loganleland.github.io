@@ -221,8 +221,11 @@ Finished. Total time: 0.442s
           <li>Execute on laptop: ssh -p 8022 localhost</li>
         </ul>
 
-        <h1 id="drivers">Userspace drivers</h1> <p></p>
+        <h1 id="drivers">Drivers</h1> <p></p>
         <h2 id="device-files">Device Files</h2>
+        <p> To list character devices:</p>
+        <pre data-language="bash"><code># find / -type c 2>/dev/null | sort</code></pre>
+        <p>As expected all character devices are found in /dev .</p>
       </div>
     </article>
 </body>
