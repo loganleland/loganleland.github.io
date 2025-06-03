@@ -116,7 +116,9 @@
         </ul>
 
         <p> Each restart will display a warning regarding the bootloader being unlocked. Fastboot can be used to lock the bootloader.</p>
-        <li> https://android.googlesource.com/platform/system/core/+/master/fastboot </li>
+	<ul>
+          <li> https://android.googlesource.com/platform/system/core/+/master/fastboot </li>
+	</ul>
  
         <h2 id="root">Root</h2> 
         <p>Root is not strictly required but can make your life easier when working with a pixel. You'll be able to interact with userspace device drivers, ssh with a laptop over usb and install packages in termux without root.</p>
@@ -155,15 +157,17 @@
         </ul>
 
         <p> <font color="#54ffb2">5.</font> Download Magisk </p>
-        <li>Download the latest apk from https://github.com/topjohnwu/Magisk/releases</li>
+	<ul><li>Download the latest apk from https://github.com/topjohnwu/Magisk/releases</li></ul>
         <p> <font color="#54ffb2">6.</font> Connect and Enable USB File Transfer.</p>
-        <li> Move init_boot.img to Download folder of pixel's internal storage</li>
-        <li> Move Magisk apk to Download folder of pixel's internal storage</li>
+	<ul><li> Move init_boot.img to Download folder of pixel's internal storage</li>
+	    <li> Move Magisk apk to Download folder of pixel's internal storage</li>
+	</ul>
 
         <p> <font color="#54ffb2">7.</font> Install Magisk apk </p>
-        <li> Enable: Install unknown apps </li>
-        <li> Click Magisk apk in Downloads folder to install </li>
-
+	<ul>
+          <li> Enable: Install unknown apps </li>
+          <li> Click Magisk apk in Downloads folder to install </li>
+        </ul>
         <p> <font color="#54ffb2">8.</font> Patch init_boot.img from Magisk </p>
         <ul>
         <li> Execute Magisk: Install </li>
@@ -175,9 +179,11 @@
         </ul>
 
         <p> <font color="#54ffb2">9.</font> Enable Developer Mode / USB Debugging</p>
+	<ul>
         <li> Enable developer mode again since it could be wiped after unlocking the bootloader</li>
         <li> Enable USB Debugging for adb </li>
         <li> Trust laptop for usb debugging </li>
+        </ul>
 
         <p> <font color="#54ffb2">10.</font> Reboot into bootloader </p>
         <ul>
@@ -188,14 +194,14 @@
         </ul>
 
         <p> <font color="#54ffb2">11.</font> Flash patched init_boot.img </p>
-        <li> Execute on laptop: fastboot flash init_boot /path/to/patched_init_boot.img</li>
+	<ul><li> Execute on laptop: fastboot flash init_boot /path/to/patched_init_boot.img</li></ul>
         <pre data-language="bash"><code>leland@light:~/Downloads/$ fastboot flash init_boot ./magisk_patched-29000_oMsIj.img 
 Sending 'init_boot_a' (8192 KB)                    OKAY [  0.364s]
 Writing 'init_boot_a'                              OKAY [  0.074s]
 Finished. Total time: 0.442s
         </code></pre>
-
-        <li> Execute on laptop: fastboot reboot</li> 
+          
+	<ul><li> Execute on laptop: fastboot reboot</li></ul>
 
         <b> Pixel is now rooted </b>
 
