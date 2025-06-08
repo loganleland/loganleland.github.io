@@ -737,3 +737,15 @@ h2 {
         .article-content tr:last-child td {
             border-bottom: none;
         }
+
+    details {
+      margin-bottom: 1em;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      background: #333;
+      padding: 0.5em;
+      border-radius: 5px;
+    }
