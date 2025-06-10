@@ -673,6 +673,8 @@ int main() {
       <p>The policy file on pixel9 is located /sys/fs/selinux/policy and can be parsed with sesearch. I have dockerized sesearch <a href="https://github.com/loganleland/containers/tree/main/selinux">here</a> for ease of use.</p>
        <ul>
         <li>allow and allowxperm rules: <a href="./policy">policy</a></li>
+        <li>allow and allowxperm rules (character device file): <a href="./policy_allow_chr_file">policy</a></li>
+        <li>allow and allowxperm rules (character device file and untrusted context): <a href="./untrusted_allow_chr_file">policy</a></li>
        </ul>
        </div>
     </article>
