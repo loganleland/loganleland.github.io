@@ -54,15 +54,15 @@
       <div class="article-content">
         <h1 id="setup">Setup</h1> <p></p>
         <h2 id="purchase">Purchase</h2> 
-          <p> The following is written with a pixel 9 bought from the google store without financing. Do not unlock the bootloader or root your personal use cellphone. Unlocking the bootloader will erase data on the pixel 9 and if done incorrectly and brick the device.</p>
+          <p> The following is written with a pixel 9 bought from the google store without financing. Do not unlock the bootloader or root your personal use cellphone. Unlocking the bootloader will erase data on the pixel 9 and if flashed incorrectly can brick the device.</p>
           <ul>
             <li> Buying from sources other than Google can hinder unlocking of the bootloader.</li>
-            <li> It has been reported Verizon disallows unlocking the bootloader of financed pixel 9 and when paid off will require you take additional actions for unlocking the bootloader.
+            <li> It has been reported Verizon disallows unlocking the bootloader of financed pixel 9 and when paid off will require you take additional actions (calling/emailing) for unlocking the bootloader.</li>
             <li>Note that carrier locking is different than bootloader locking</li>
           </ul>
 
           <p>If you don't already have a cable to connect the pixel to a laptop I would suggest the 4-1 100W cable from xcool since it can connect to all common kinds of USB ports.</p>
-          <p>Depending on your use case the mission darkness faraday bag with window and usb passthrough works well. With max screen brightness you'll be able to observe the pixel 9 screen:</p>
+          <p>Depending on your work the mission darkness faraday bag with window and usb passthrough works well. With max screen brightness you'll be able to observe the pixel 9 screen:</p>
 
           <img src="../images/faraday.png">
 
@@ -97,7 +97,7 @@
           <li>Enable: Allow OEM unlocking </li>
         </ul>
 
-        <p> <font color="#54ffb2">3.</font> Install fastboot on a laptop/desktop: https://developer.android.com/tools/releases/platform-tools#downloads</p>
+        <p> <font color="#54ffb2">3.</font> Install fastboot on a laptop/desktop: <a href="https://developer.android.com/tools/releases/platform-tools#downloads">fastboot</a></p>
 
         <p> <font color="#54ffb2">4.</font> Reboot device into fast boot mode </p>
         <ul>
@@ -112,7 +112,9 @@
         </div>
         <ul>
           <li> Connect device via usb to laptop </li>
-          <li> On laptop execute: fastboot devices; ensure serial number is in stdout</li>
+          <li> On laptop execute: fastboot devices
+            <ul><li>ensure serial number is in stdout</li></ul>
+          </li>
           <li> On laptop execute: fastboot flashing unlock</li>
           <li> Pixel 9 screen should display a warning regarding unlocking the bootloader </li>
           <li> Use volume buttons to change: "Do not unlock the bootloader" to "Unlock the bootloader"</li>
@@ -127,7 +129,7 @@
 	</ul>
  
         <h2 id="root">Root</h2> 
-        <p>Root is not strictly required but can make your life easier when working with a pixel. You'll be able to interact with userspace device drivers, ssh with a laptop over usb and install packages in termux without root.</p>
+        <p>Root is not strictly required but can make your life much easier when working with a pixel. You'll be able to interact with more drivers, search the filesystem (ls /dev), disable selinux and more. Without root you'll still be able to ssh with a laptop over usb and install packages in termux.</p>
         <p>With the bootloader unlocked Magisk can be used to provide root.<p>
         <p> <font color="#54ffb2">1.</font> Record the build number to download correct factory image.</p>
         <ul>
@@ -139,7 +141,7 @@
           <p>Recording an incorrect build number can brick your device</p>
         </div>
 
-        <p> <font color="#54ffb2">2.</font> Obtain a factory image from https://developers.google.com/android/images for your device/build number.</p>
+        <p> <font color="#54ffb2">2.</font> Obtain a factory image from <a href="https://developers.google.com/android/images">factory images</a> for your device/build number.</p>
         <p> Links to each factory image for each variant of the pixel devices: </p>
         <ul>
           <li><a href="https://developers.google.com/android/images#tokay">tokay aka Pixel 9</a></li>
@@ -149,7 +151,7 @@
           <li> <a href="https://developers.google.com/android/images#tegu">tegu for Pixel 9a</a></li>
         </ul>
 
-        <p> Take note of image variants for Verizon, DTAG, TW, EMEA, T-Mobile and Telestra. You don't want to mix and match variants (don't flash a Verizon variant if you didn't buy the pixel 9 from verizon).</p>
+        <p> Take note of image variants for Verizon, DTAG, TW, EMEA, T-Mobile and Telestra. You don't want to mix and match variants (don't flash a Verizon variant if you didn't buy the pixel 9 from verizon). The outcome is not tested.</p>
 
         <p> <font color="#54ffb2">3.</font> After downloading the image check the sha256 hash matches.</p>
         <div class="callout">
@@ -163,14 +165,14 @@
         </ul>
 
         <p> <font color="#54ffb2">5.</font> Download Magisk </p>
-	<ul><li>Download the latest apk from https://github.com/topjohnwu/Magisk/releases</li></ul>
+        <ul><li>Download the latest apk from <a href="https://github.com/topjohnwu/Magisk/releases">releases</a></li></ul>
         <p> <font color="#54ffb2">6.</font> Connect and Enable USB File Transfer.</p>
-	<ul><li> Move init_boot.img to Download folder of pixel's internal storage</li>
-	    <li> Move Magisk apk to Download folder of pixel's internal storage</li>
-	</ul>
+	      <ul><li> Move init_boot.img to Download folder of pixel's internal storage</li>
+	        <li> Move Magisk apk to Download folder of pixel's internal storage</li>
+	      </ul>
 
         <p> <font color="#54ffb2">7.</font> Install Magisk apk </p>
-	<ul>
+	      <ul>
           <li> Enable: Install unknown apps </li>
           <li> Click Magisk apk in Downloads folder to install </li>
         </ul>
@@ -214,10 +216,10 @@ Finished. Total time: 0.442s
         <h2 id="final-setup">Finsh Setup QoL</h2> 
         <p> <font color="#54ffb2">1.</font> Install Termux. Download the latest non-beta release for arm64 from</p>
         <ul>
-          <li>https://github.com/termux/termux-app/releases</li>
+          <li><a href="https://github.com/termux/termux-app/releases">releases</a></li>
         </ul>
         <p> <font color="#54ffb2">2.</font> Execute in Termux: su </p>
-        <p> <font color="#54ffb2">2.</font> Grant Termux Root </p>
+        <p> <font color="#54ffb2">3.</font> Grant Termux Root </p>
         <ul>
           <li>Execute in termux: su</li>
           <li>Magisk prompt will appear: grant termux superuser priv </li>
@@ -683,11 +685,8 @@ int main() {
 u:object_r:gpu_device:s0 /dev/mali0
         </code></pre>
 
-        <p>/dev/mali0 is in the context of gpu_device as an example.</p>
+        <h3 id="character-device-context">Character device contexts</h3>
 
-        <details>
-        <summary>Context of character devices in DevFS</summary>
-          <br>
           <details>
           <summary>aoc_device</summary>
             <ul>
@@ -1446,8 +1445,6 @@ u:object_r:gpu_device:s0 /dev/mali0
             </ul>
           </details>
 
-
-        </details>
       </div>
     </article>
 </body>
