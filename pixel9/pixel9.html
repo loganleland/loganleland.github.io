@@ -36,7 +36,13 @@
                     <a href="#drivers" class="toc-link">Userspace Drivers</a>
                     <ul class="toc-nested">
                         <li class="toc-item">
-                            <a href="#device-files" class="toc-link">Device Files</a>
+                            <a href="#background-drivers" class="toc-link">Background</a>
+                        </li>
+                        <li class="toc-item">
+                            <a href="#direct-drivers" class="toc-link">Direct Enumeration</a>
+                        </li>
+                        <li class="toc-item">
+                            <a href="#selinux-drivers" class="toc-link">SELinux Enumeration</a>
                         </li>
                     </ul>
                 </li>
@@ -228,8 +234,7 @@ Finished. Total time: 0.442s
         </ul>
 
         <h1 id="drivers">Drivers</h1> <p></p>
-        <h2 id="device-files">Device Files</h2>
-        <h3>Background</h3>
+        <h2 id="background-drivers">Background</h2>
         <p> On android and unix in general a special file called a character device driver exists to control physical hardware (gpu, camera, microphones, battery, gps, usb, etc).
             These files expose an interface for userland to interact with physical hardware/kernel module. This is done by the OS redirecting calls such as open, ioctl, read, write specified by the structure file_operations.
           <pre data-language="c"><code>static const struct file_operations kbase_fops = {
@@ -248,6 +253,7 @@ Finished. Total time: 0.442s
         In the above example userland calls to open of the character device is redirected to kbase_open and ioctl calls to the opened device is defined by kbase_ioctl and so on. 
         </p>
 
+        <h2 id="direct-drivers">Direct Enumeration</h2>
         <p> To list character devices (root required):</p>
         <pre data-language="bash"><code># find / -type c 2>/dev/null | sort</code></pre>
 
@@ -662,6 +668,12 @@ int main() {
           </ul>
         </details>
 
+      <h2 id="selinux-drivers">SELinux Enumeration</h2>
+      <p>SELinux (Security-Enhanced Linux) is a mandatory access control over processes (rules for what each process can do). These rules can be reviewed to enumerate what the untrusted context and every context of interest can do.</p>
+      <p>The policy file on pixel9 is located /sys/fs/selinux/policy and can be parsed with sesearch. I have dockerized sesearch <a href="https://github.com/loganleland/containers/tree/main/selinux">here</a> for ease of use.</p>
+       <ul>
+        <li>allow and allowxperm rules: <a href="./policy">policy</a></li>
+       </ul>
        </div>
     </article>
 </body>
