@@ -669,14 +669,786 @@ int main() {
         </details>
 
       <h2 id="selinux-drivers">SELinux Enumeration</h2>
-      <p>SELinux (Security-Enhanced Linux) is a mandatory access control over processes (rules for what each process can do). These rules can be reviewed to enumerate what the untrusted context and every context of interest can do.</p>
+      <p>SELinux (Security-Enhanced Linux) is a mandatory access control describing rules (what context can open/ioctl a character device for instance). These rules can be reviewed to understand the overall system and answer important questions such as: what can I do with an untrusted context.</p>
       <p>The policy file on pixel9 is located /sys/fs/selinux/policy and can be parsed with sesearch. I have dockerized sesearch <a href="https://github.com/loganleland/containers/tree/main/selinux">here</a> for ease of use.</p>
        <ul>
         <li>allow and allowxperm rules: <a href="./policy">policy</a></li>
         <li>allow and allowxperm rules (character device file): <a href="./policy_allow_chr_file">policy</a></li>
         <li>allow and allowxperm rules (character device file and untrusted context): <a href="./untrusted_allow_chr_file">policy</a></li>
        </ul>
-       </div>
+
+        <p>The above output from sesearch includes the context label. The context for files can be recovered with ls</p>
+        <pre data-language="bash"><code>
+:/ # ls -Z /dev/mali0
+u:object_r:gpu_device:s0 /dev/mali0
+        </code></pre>
+
+        <p>/dev/mali0 is in the context of gpu_device as an example.</p>
+
+        <details>
+        <summary>Context of character devices in DevFS</summary>
+          <br>
+          <details>
+          <summary>aoc_device</summary>
+            <ul>
+              <li>acd-ambient_pcm</li>
+              <li>acd-aocx_control</li>
+              <li>acd-aocx_inject0</li>
+              <li>acd-aocx_inject1</li>
+              <li>acd-aocx_tapout0</li>
+              <li>acd-aocx_tapout1</li>
+              <li>acd-audio_ap_offload_rx</li>
+              <li>acd-audio_ap_offload_tx</li>
+              <li>acd-audio_bulk_rx</li>
+              <li>acd-audio_bulk_tx</li>
+              <li>acd-audio_dcdoff_ref</li>
+              <li>acd-audio_input_bulk_rx</li>
+              <li>acd-audio_input_bulk_tx</li>
+              <li>acd-audio_input_tuning</li>
+              <li>acd-audio_output_tuning</li>
+              <li>acd-audio_rtp_rx</li>
+              <li>acd-audio_rtp_tx</li>
+              <li>acd-audio_tap0</li>
+              <li>acd-audio_tap1</li>
+              <li>acd-audio_tap2</li>
+              <li>acd-audio_tap3</li>
+              <li>acd-audio_tap4</li>
+              <li>acd-audio_tap5</li>
+              <li>acd-audio_tap6</li>
+              <li>acd-audio_tap7</li>
+              <li>acd-audio_tap8</li>
+              <li>acd-audio_tap9</li>
+              <li>acd-audio_tap10</li>
+              <li>acd-audio_tap11</li>
+              <li>acd-chre_bt_offload_ctl</li>
+              <li>acd-chre_bt_offload_data_rx</li>
+              <li>acd-chre_bt_offload_data_tx</li>
+              <li>acd-chre_ctl</li>
+              <li>acd-chre_data_rx</li>
+              <li>acd-chre_data_tx</li> 
+              <li>acd-com.google.chre</li>
+              <li>acd-com.google.chre.non_wake_up</li>
+              <li>acd-com.google.umfw_stat</li>
+              <li>acd-com.google.usf</li>
+              <li>acd-com.google.usf.non_wake_up</li>
+              <li>acd-debug</li>
+              <li>acd-hotword_notification</li>
+              <li>acd-hotword_pcm</li>
+              <li>acd-logging</li>
+              <li>acd-mc_headpos</li>
+              <li>acd-mel_processor</li>
+              <li>acd-model_data</li>
+              <li>acd-sound_trigger</li>
+              <li>aoc</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>device</summary>
+            <ul>
+              <li>acd-audio_haptaudio</li>
+              <li>acd-audio_output_tuning_ext</li>
+              <li>acd-audio_spatial_f1</li>
+              <li>acd-factory_diag</li>
+              <li>acd-trace_3z_0</li>
+              <li>acd-trace_3z_1</li>
+              <li>acd-trace_a32</li>
+              <li>acd-trace_f1</li>
+              <li>cluster0_freq_max</li>
+              <li>cluster0_freq_min</li>
+              <li>cluster1_freq_max</li>
+              <li>cluster1_freq_min</li>
+              <li>cluster2_freq_max</li>
+              <li>cluster2_freq_min</li>
+              <li>dri/renderD128</li>
+              <li>full</li>
+              <li>gpiochip0</li>
+              <li>gpiochip1</li>
+              <li>gpiochip2</li>
+              <li>gpiochip3</li>
+              <li>gpiochip4</li>
+              <li>gpiochip5</li>
+              <li>gpiochip6</li>
+              <li>gpiochip7</li>
+              <li>gpiochip8</li>
+              <li>gpiochip9</li>
+              <li>gpiochip10</li>
+              <li>gpiochip11</li>
+              <li>gpiochip12</li>
+              <li>gpiochip13</li>
+              <li>gpiochip14</li>
+              <li>gpiochip15</li>
+              <li>gpiochip16</li>
+              <li>gpiochip17</li>
+              <li>gpiochip18</li>
+              <li>gpiochip19</li>
+              <li>gpiochip20</li>
+              <li>gpiochip21</li>
+              <li>gpiochip22</li>
+              <li>gpiochip23</li>
+              <li>gpiochip24</li>
+              <li>gpiochip25</li>
+              <li>gpiochip26</li>
+              <li>gpiochip27</li>
+              <li>gpiochip28</li>
+              <li>gpiochip29</li>
+              <li>gpiochip30</li>
+              <li>gpiochip31</li>
+              <li>gpiochip32</li>
+              <li>gpiochip33</li>
+              <li>gpiochip34</li>
+              <li>gpiochip35</li>
+              <li>gpiochip36</li>
+              <li>gpiochip37</li>
+              <li>gpiochip38</li>
+              <li>gpiochip39</li>
+              <li>gpiochip40</li>
+              <li>gpiochip41</li>
+              <li>gpiochip42</li>
+              <li>gpiochip43</li>
+              <li>gpiochip44</li>
+              <li>gpiochip45</li>
+              <li>gpiochip46</li>
+              <li>gpiochip47</li>
+              <li>gpiochip48</li>
+              <li>gpiochip49</li>
+              <li>gpiochip50</li>
+              <li>gpiochip51</li>
+              <li>gpiochip52</li>
+              <li>gpiochip53</li>
+              <li>gpiochip54</li>
+              <li>gpiochip55</li>
+              <li>gpiochip56</li>
+              <li>gpiochip57</li>
+              <li>gpiochip58</li>
+              <li>gpiochip59</li>
+              <li>gpiochip60</li>
+              <li>gpiochip61</li>
+              <li>gpiochip62</li>
+              <li>gpiochip63</li>
+              <li>gpiochip64</li>
+              <li>gsa0</li>
+              <li>gti.0</li>
+              <li>hcp2</li>
+              <li>i2c-2</li>
+              <li>i2c-3</li>
+              <li>i2c-4</li>
+              <li>i2c-5</li>
+              <li>i2c-6</li>
+              <li>i2c-7</li>
+              <li>i2c-8</li>
+              <li>i2c-9</li>
+              <li>i2c-10</li>
+              <li>i2c-19</li>
+              <li>lwis-test</li>
+              <li>multipdp</li>
+              <li>ppp</li>
+              <li>rfkill</li>
+              <li>rio</li>
+              <li>snapshot</li>
+              <li>tcm0</li>
+              <li>ttynull</li>
+              <li>tui-driver</li>
+              <li>ufs-bsg0</li>
+              <li>umts_loopback</li>
+              <li>umts_rcs0</li>
+              <li>umts_rcs1</li>
+              <li>umts_toe0</li>
+              <li>vsock</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>amcs_device</summary>
+            <ul>
+              <li>amcs</li>
+            </ul>
+          </details>
+
+         <details>
+          <summary>ashmem_device</summary>
+            <ul>
+              <li>ashmem</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>ashmem_libcutils_device</summary>
+            <ul>
+              <li>ashmema89909c8-c70e-430d-8521-dfc7ad14edb7</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>battery_history_device</summary>
+            <ul>
+              <li>battery_history</li>
+            </ul>
+          </details>
+
+         <details>
+          <summary>video_device</summary>
+            <ul>
+              <li>bigwave</li>
+              <li>video6</li>
+              <li>video7</li>
+              <li>video8</li>
+              <li>video9</li>
+              <li>video10</li>
+              <li>video11</li>
+            </ul>
+          </details>
+
+         <details>
+          <summary>binder_device</summary>
+            <ul>
+              <li>binderfs/binder</li>
+              <li>binderfs/binder-control</li>
+            </ul>
+          </details>
+
+         <details>
+          <summary>hwbinder_device</summary>
+            <ul>
+              <li>binderfs/hwbinder</li>
+              <li>binderfs/binder-control</li>
+            </ul>
+          </details>
+
+         <details>
+          <summary>vndbinder_device</summary>
+            <ul>
+              <li>binderfs/vndbinder</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>console_device</summary>
+            <ul>
+              <li>console</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>latency_device</summary>
+            <ul>
+              <li>cpu_dma_latency</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>dm_device</summary>
+            <ul>
+              <li>device-mapper</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>dmabuf_heap_device</summary>
+            <ul>
+              <li>dma_heap/aaudio_capture_heap</li>
+              <li>dma_heap/aaudio_playback_heap</li>
+              <li>dma_heap/mfc_fw-secure</li>
+              <li>dma_heap/tui-secure</li>
+              <li>dma_heap/video_system</li>
+              <li>dma_heap/video_system-uncached</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>faceauth_heap_device</summary>
+            <ul>
+              <li>dma_heap/faceauth_dsp-secure</li>
+              <li>dma_heap/faceauth_tpu-secure</li>
+              <li>dma_heap/famodel-secure</li>
+              <li>dma_heap/faprev-secure</li>
+              <li>dma_heap/farawimg-secure</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>sensor_direct_heap_device</summary>
+            <ul>
+              <li>dma_heap/sensor_direct_heap</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>dmabuf_system_heap_device</summary>
+            <ul>
+              <li>dma_heap/system</li>
+              <li>dma_heap/system-uncached</li>
+              <li>dma_heap/vframe-secure</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>vscaler_secure_heap_device</summary>
+            <ul>
+              <li>dma_heap/vscaler-secure</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>dmabuf_system_secure_heap_device</summary>
+            <ul>
+              <li>dma_heap/vstream-secure</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>graphics_device</summary>
+            <ul>
+              <li>dri/card0</li>
+              <li>fimg2d</li>
+              <li>g2d</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>edgetpu_device</summary>
+            <ul>
+              <li>edgetpu-soc</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>fuse_device</summary>
+            <ul>
+              <li>fuse</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>vendor_gnss_device</summary>
+            <ul>
+              <li>gnss_boot</li>
+              <li>gnss_dump</li>
+              <li>gnss_ipc</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>citadel_device</summary>
+            <ul>
+              <li>gsc0</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>gxp_device</summary>
+            <ul>
+              <li>gxp</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>random_device</summary>
+            <ul>
+              <li>random</li>
+              <li>urandom</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>hw_random_device</summary>
+            <ul>
+              <li>hw_random</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>input_device</summary>
+            <ul>
+              <li>input/event0</li>
+              <li>input/event1</li>
+              <li>input/event2</li>
+              <li>input/event3</li>
+              <li>v4l-touch0</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>lwis_device</summary>
+            <ul>
+              <li>ispolin_ranging</li>
+              <li>lwis-act-cornerfolk</li>
+              <li>lwis-act-cornerfolk-dokkaebi</li>
+              <li>lwis-act-cornerfolk-taotie-uw</li>
+              <li>lwis-be-core</li>
+              <li>lwis-dpm</li>
+              <li>lwis-eeprom-djinn</li>
+              <li>lwis-eeprom-smaug-dokkaebi</li>
+              <li>lwis-eeprom-smaug-taotie-uw</li>
+              <li>lwis-flash-lm3644</li>
+              <li>lwis-gdc0</li>
+              <li>lwis-gdc1</li>
+              <li>lwis-gse</li>
+              <li>lwis-gtnr-align</li>
+              <li>lwis-gtnr-merge</li>
+              <li>lwis-isp-fe</li>
+              <li>lwis-lme</li>
+              <li>lwis-mcsc</li>
+              <li>lwis-ois-djinn</li>
+              <li>lwis-sensor-boitata</li>
+              <li>lwis-sensor-dokkaebi</li>
+              <li>lwis-sensor-taotie-uw</li>
+              <li>lwis-slc</li>
+              <li>lwis-top</li>
+              <li>lwis-votf</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>kmsg_device</summary>
+            <ul>
+              <li>kmsg</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>kvm_device</summary>
+            <ul>
+              <li>kvm</li>
+              <li>vhost-vsock</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>logbuffer_device</summary>
+            <ul>
+              <li>logbuffer_bd</li>
+              <li>logbuffer_btlpm</li>
+              <li>logbuffer_cpif</li>
+              <li>logbuffer_cpm</li>
+              <li>logbuffer_max77779_fwupdate</li>
+              <li>logbuffer_max77779fg</li>
+              <li>logbuffer_max77779fg_monitor</li>
+              <li>logbuffer_pca9468</li>
+              <li>logbuffer_rtx</li>
+              <li>logbuffer_ssoc</li>
+              <li>logbuffer_tcpm</li>
+              <li>logbuffer_ttf</li>
+              <li>logbuffer_tty18</li>
+              <li>logbuffer_usbpd</li>
+              <li>logbuffer_wireless</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>display_log_device</summary>
+            <ul>
+              <li>logbuffer_dsim0</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>pcie_log_device</summary>
+            <ul>
+              <li>logbuffer_pcie0</li>
+              <li>logbuffer_pcie1</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>loop_control_device</summary>
+            <ul>
+              <li>loop-control</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>gpu_device</summary>
+            <ul>
+              <li>mali0</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>null_device</summary>
+            <ul>
+              <li>null</li>
+              <li>/sys/fs/selinux/null</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>radio_device</summary>
+            <ul>
+              <li>oem_ipc0</li>
+              <li>oem_ipc1</li>
+              <li>oem_ipc2</li>
+              <li>oem_ipc3</li>
+              <li>oem_ipc4</li>
+              <li>oem_ipc5</li>
+              <li>oem_ipc6</li>
+              <li>oem_ipc7</li>
+              <li>oem_test</li>
+              <li>umts_boot0</li>
+              <li>umts_dm0</li>
+              <li>umts_ipc0</li>
+              <li>umts_ipc1</li>
+              <li>umts_rfs0</li>
+              <li>umts_router</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>pmsg_device</summary>
+            <ul>
+              <li>pmsg0</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>ptmx_device</summary>
+            <ul>
+              <li>ptmx</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>untrusted_app_all_devpts</summary>
+            <ul>
+              <li>pts/0</li>
+              <li>pts/1</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>devpts</summary>
+            <ul>
+              <li>pts/ptmx</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>fingerprint_device</summary>
+            <ul>
+              <li>qbt_fd</li>
+              <li>qbt_ipc</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>rtc_device</summary>
+            <ul>
+              <li>rtc0</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>sg_device</summary>
+            <ul>
+              <li>sg0</li>
+              <li>sg1</li>
+              <li>sg2</li>
+              <li>sg3</li>
+              <li>sg4</li>
+              <li>sg5</li>
+              <li>sg6</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>audio_device</summary>
+            <ul>
+              <li>snd/comprC0D6</li>
+              <li>snd/controlC0</li>
+              <li>snd/pcmC0D0p</li>
+              <li>snd/pcmC0D1p</li>
+              <li>snd/pcmC0D2p</li>
+              <li>snd/pcmC0D3p</li>
+              <li>snd/pcmC0D4p</li>
+              <li>snd/pcmC0D5p</li>
+              <li>snd/pcmC0D7p</li>
+              <li>snd/pcmC0D8c</li>
+              <li>snd/pcmC0D9c</li>
+              <li>snd/pcmC0D10c</li>
+              <li>snd/pcmC0D11c</li>
+              <li>snd/pcmC0D12c</li>
+              <li>snd/pcmC0D13c</li>
+              <li>snd/pcmC0D14p</li>
+              <li>snd/pcmC0D15c</li>
+              <li>snd/pcmC0D16p</li>
+              <li>snd/pcmC0D17c</li>
+              <li>snd/pcmC0D18p</li>
+              <li>snd/pcmC0D19p</li>
+              <li>snd/pcmC0D20c</li>
+              <li>snd/pcmC0D21c</li>
+              <li>snd/pcmC0D22c</li>
+              <li>snd/pcmC0D23p</li>
+              <li>snd/pcmC0D25p</li>
+              <li>snd/pcmC0D26c</li>
+              <li>snd/pcmC0D27c</li>
+              <li>snd/pcmC0D28p</li>
+              <li>snd/pcmC0D29p</li>
+              <li>snd/pcmC0D30p</li>
+              <li>snd/pcmC0D31p</li>
+              <li>snd/pcmC0D32c</li>
+              <li>snd/pcmC0D53p</li>
+              <li>snd/pcmC0D54c</li>
+              <li>snd/timer</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>vibrator_snd_device</summary>
+            <ul>
+              <li>snd/pcmC0D24p</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>sscoredump_device</summary>
+            <ul>
+              <li>sscd_aoc</li>
+              <li>sscd_bigwave</li>
+              <li>sscd_debugcore</li>
+              <li>sscd_gnss</li>
+              <li>sscd_gxp_callisto</li>
+              <li>sscd_mali</li>
+              <li>sscd_mfc-core</li>
+              <li>sscd_rio</li>
+              <li>sscd_wlan</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>nfc_device</summary>
+            <ul>
+              <li>st21nfc</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>st54spi_device</summary>
+            <ul>
+              <li>st54spi</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>touch_offload_device</summary>
+            <ul>
+              <li>touch_offload</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>tee_device</summary>
+            <ul>
+              <li>trusty-ipc-dev0</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>trusty_log_device</summary>
+            <ul>
+              <li>trusty-log0</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>owntty_device</summary>
+            <ul>
+              <li>tty</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>serial_device</summary>
+            <ul>
+              <li>ttyGS0</li>
+              <li>ttyGS1</li>
+              <li>ttyGS2</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>tty_device</summary>
+            <ul>
+              <li>ttySAC0</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>hci_attach_dev</summary>
+            <ul>
+              <li>ttySAC18</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>tun_device</summary>
+            <ul>
+              <li>tun</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>ublk_control_device</summary>
+            <ul>
+              <li>ublk-control</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>uhid_device</summary>
+            <ul>
+              <li>uhid</li>
+              <li>uinput</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>pktrouter_device</summary>
+            <ul>
+              <li>umts_wfc0</li>
+              <li>umts_wfc1</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>usbaccessory_device</summary>
+            <ul>
+              <li>usb_accessory</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>hw_jpg_device</summary>
+            <ul>
+              <li>video12</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>watchdog_device</summary>
+            <ul>
+              <li>watchdog</li>
+              <li>watchdog0</li>
+              <li>watchdog1</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>wb_coexistence_dev</summary>
+            <ul>
+              <li>wbrc</li>
+            </ul>
+          </details>
+
+          <details>
+          <summary>zero_device</summary>
+            <ul>
+              <li>zero</li>
+            </ul>
+          </details>
+
+
+        </details>
+      </div>
     </article>
 </body>
 </html>
