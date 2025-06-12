@@ -672,19 +672,22 @@ int main() {
         </details>
 
       <h2 id="selinux-drivers">SELinux Enumeration</h2>
-      <p>SELinux (Security-Enhanced Linux) is a mandatory access control describing rules (what context can open/ioctl a character device for instance). These rules can be reviewed to understand the overall system and answer important questions such as: what can I do with an untrusted context.</p>
-      <p>The policy file on pixel9 is located /sys/fs/selinux/policy and can be parsed with sesearch. I have dockerized sesearch <a href="https://github.com/loganleland/containers/tree/main/selinux">here</a> for ease of use.</p>
+      <p>SELinux (Security-Enhanced Linux) is a mandatory access control. SELinux specifies rules of how different context can interact. Multiple files can be in a single context. Each file contains context information in xattr.</p>
+
+      <p>The context of /dev/mali0 is gpu_device shown by ls -Z</p>
+        <pre data-language="bash"><code>
+:/ # ls -Z /dev/mali0
+u:object_r:gpu_device:s0 /dev/mali0
+        </code></pre>
+
+      <p>These rules can be reviewed to help understand the overall system and answer important questions such as: what can I do with an untrusted context?</p>
+
+      <p>SELinux rules are stored in a policy file on pixel9 is located <font color="##54ffb2">/sys/fs/selinux/policy</font> and can be parsed with sesearch. I have dockerized sesearch <a href="https://github.com/loganleland/containers/tree/main/sesearch">here</a>.</p>
        <ul>
         <li>allow and allowxperm rules: <a href="./policy">policy</a></li>
         <li>allow and allowxperm rules (character device file): <a href="./policy_allow_chr_file">policy</a></li>
         <li>allow and allowxperm rules (character device file and untrusted context): <a href="./untrusted_allow_chr_file">policy</a></li>
        </ul>
-
-        <p>The above output from sesearch includes the context label. The context for files can be recovered with ls</p>
-        <pre data-language="bash"><code>
-:/ # ls -Z /dev/mali0
-u:object_r:gpu_device:s0 /dev/mali0
-        </code></pre>
 
         <h3 id="character-device-context">Character device contexts</h3>
 
