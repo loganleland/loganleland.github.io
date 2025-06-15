@@ -33,10 +33,10 @@
                 </li>
                 
                 <li class="toc-item">
-                    <a href="#drivers" class="toc-link">Drivers</a>
+                    <a href="#enumeration" class="toc-link">Enumeration</a>
                     <ul class="toc-nested">
                         <li class="toc-item">
-                            <a href="#background-drivers" class="toc-link">Background</a>
+                            <a href="#background-drivers" class="toc-link">Background: Drivers</a>
                         </li>
                         <li class="toc-item">
                             <a href="#direct-drivers" class="toc-link">Direct Enumeration</a>
@@ -45,6 +45,7 @@
                             <a href="#selinux-drivers" class="toc-link">SELinux Enumeration</a>
                         </li>
                         <li class="toc-item"><a href="#all-allow" class="toc-link">Graph of SELinux Allow Rules</a></li>
+                        <li class="toc-item"><a href="#untrusted-context" class="toc-link">Untrusted Context</a></li>
                     </ul>
                 </li>
             </ol>
@@ -236,8 +237,8 @@ Finished. Total time: 0.442s
           <li>Execute on laptop: ssh -p 8022 localhost</li>
         </ul>
 
-        <h1 id="drivers">Drivers</h1> <p></p>
-        <h2 id="background-drivers">Background</h2>
+        <h1 id="enumeration">Enumeration</h1> <p></p>
+        <h2 id="background-drivers">Background: Drivers</h2>
         <p> On android and unix in general a special file called a character device driver exists to control physical hardware (gpu, camera, microphones, battery, gps, usb, etc).
             These files expose an interface for userland to interact with physical hardware/kernel module. This is done by the OS redirecting calls such as open, ioctl, read, write specified by the structure file_operations.
           <pre data-language="c"><code>static const struct file_operations kbase_fops = {
@@ -1579,7 +1580,7 @@ simulation.on("tick", () => {
       <p>
       <ul>
           <li>Debug enabled apk: <a href="./app-debug.apk">app-debug.apk</a>
-      </ul>
+      </ul></p>
 
       <p><font color="#54ffb2">1.</font> Install apk (laptop): 
       <pre data-language="bash"><code>
@@ -1599,6 +1600,8 @@ Success</code></pre></p>
  
 
     <h3>Untrusted Allow Rules</h3>
+
+    <p>Red edges are an open rule while green edges represent I/O</p>
 
   <svg id="graph-all-untrusted" width="100%" height="100%"  style="border:1px solid pink">
   <style>
@@ -1722,6 +1725,139 @@ simulation.on("tick", () => {
 });
 }
 </script>
+
+
+      <h3>edgetpu_device and gxp_device allow open</h3>
+
+      <p> Each directed edge represents an open allow rule. edgetpu_device and gxp_device can be I/O'd from an untrusted context but not directly opened.</p>
+
+  <svg id="edgetpu_device-gxp_device" width="100%" height="100%"  style="border:1px solid pink">
+  <style>
+    body { background: #1e1e1e; margin: 0; }
+    text { fill: white; font: 12px sans-serif; }
+    line { stroke: #88cc88; stroke-width: 1.5px; marker-end: url(#arrow); }
+    circle { fill: #2d3e50; stroke: #88cc88; stroke-width: 2px; }
+    .label { fill: #ffcc66; font-size: 10px; }
+  </style></svg>
+<script>
+{
+
+let nodes = [{"id": "edgetpu_app_server"}, {"id": "edgetpu_dba_server"}, {"id": "edgetpu_device"}, {"id": "edgetpu_logging"}, {"id": "edgetpu_tachyon_server"}, {"id": "google_camera_app"}, {"id": "gxp_device"}, {"id": "gxp_logging"}, {"id": "hal_audio_default"}, {"id": "hal_camera_default"}, {"id": "hal_face_default"}, {"id": "hal_neuralnetworks_darwinn"}];
+let links = [{"source": "edgetpu_app_server", "target": "edgetpu_device", "label": ""}, {"source": "edgetpu_app_server", "target": "gxp_device", "label": ""}, {"source": "edgetpu_dba_server", "target": "edgetpu_device", "label": ""}, {"source": "edgetpu_logging", "target": "edgetpu_device", "label": ""}, {"source": "edgetpu_tachyon_server", "target": "edgetpu_device", "label": ""}, {"source": "edgetpu_tachyon_server", "target": "gxp_device", "label": ""}, {"source": "google_camera_app", "target": "gxp_device", "label": ""}, {"source": "gxp_logging", "target": "gxp_device", "label": ""}, {"source": "hal_audio_default", "target": "edgetpu_device", "label": ""}, {"source": "hal_camera_default", "target": "edgetpu_device", "label": ""}, {"source": "hal_camera_default", "target": "gxp_device", "label": ""}, {"source": "hal_face_default", "target": "edgetpu_device", "label": ""}, {"source": "hal_face_default", "target": "gxp_device", "label": ""}, {"source": "hal_neuralnetworks_darwinn", "target": "edgetpu_device", "label": ""}];
+
+
+let width = window.innerWidth;
+let height = window.innerHeight;
+
+let svg = d3.select("#edgetpu_device-gxp_device")
+  .attr("viewBox", [0, 0, width, height])
+  .call(d3.zoom().on("zoom", (event) => {
+    g.attr("transform", event.transform);
+  }));
+
+let g = svg.append("g");
+
+g.append("defs").append("marker")
+  .attr("id", "arrow")
+  .attr("viewBox", "0 -5 10 10")
+  .attr("refX", 30)
+  .attr("refY", 0)
+  .attr("markerWidth", 6)
+  .attr("markerHeight", 6)
+  .attr("orient", "auto")
+  .append("path")
+  .attr("d", "M0,-5L10,0L0,5")
+  .attr("fill", "pink");
+
+let simulation = d3.forceSimulation(nodes)
+  .force("link", d3.forceLink(links).id(d => d.id).distance(160))
+  .force("charge", d3.forceManyBody().strength(-495))
+  .force("center", d3.forceCenter(width / 2, height / 2));
+
+let link = g.append("g")
+  .selectAll("path")
+  .data(links.map((d, i) => ({ ...d, id: "link" + i })))   // add a unique id
+  .join("path")
+    .attr("id", d => d.id)          // <—— id that <textPath> will reference
+    .attr("fill", "none")
+    .attr("stroke-width", 1.5)
+    .attr("stroke", d => d.label === "open" ? "#ff6666" : "#88cc88")
+    .attr("marker-end", "url(#arrow)");
+
+let edgeLabels = g.append("g")
+  .selectAll("text")
+  .data(links)
+  .join("text")
+    .attr("class", "edge-label")
+  .append("textPath")
+    .attr("href", (d, i) => "#link" + i)   // tie to the path above
+    .attr("startOffset", "50%")            // centre the text
+    .attr("text-anchor", "middle")
+    .text(d => d.label ?? "");         
+
+g.selectAll(".edge-label textPath")
+  .style("pointer-events", "none");
+
+simulation.on("tick", () => {
+  link.attr("d", d => `M${d.source.x},${d.source.y}L${d.target.x},${d.target.y}`);
+
+  node
+    .attr("cx", d => d.x)
+    .attr("cy", d => d.y);
+
+  labels
+    .attr("x", d => d.x)
+    .attr("y", d => d.y);
+});
+
+
+let node = g.append("g")
+  .selectAll("circle")
+  .data(nodes)
+  .join("circle")
+  .attr("r", 18)
+  .call(drag(simulation));
+
+let labels = g.append("g")
+  .selectAll("text")
+  .data(nodes)
+  .join("text")
+  .text(d => d.id);
+
+function drag(simulation) {
+  return d3.drag()
+    .on("start", (event, d) => {
+      if (!event.active) simulation.alphaTarget(3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    })
+    .on("drag", (event, d) => {
+      d.fx = event.x;
+      d.fy = event.y;
+    })
+    .on("end", (event, d) => {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    });
+}
+
+simulation.on("tick", () => {
+  link.attr("d", d => `M${d.source.x},${d.source.y}L${d.target.x},${d.target.y}`);
+
+  node
+    .attr("cx", d => d.x)
+    .attr("cy", d => d.y);
+
+  labels
+    .attr("x", d => d.x)
+    .attr("y", d => d.y);
+});
+}
+</script>
+
+
+
       </div>
     </article>
   </body>
