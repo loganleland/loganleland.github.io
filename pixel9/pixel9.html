@@ -701,11 +701,11 @@ int main(void) {
 
       <p>Compile and execute:</p>
         <pre data-language="bash"><code>
-~ $ clang main.c -lselinux
-~ $ ./a.out
+$ clang main.c -lselinux
+$ ./a.out
 u:r:untrusted_app_27:s0:c32,c257,c512,c768
-~ $ su
-:/data/data/com.termux/files/home # run-as com.untrusted /data/data/com.untrusted/a.out
+$ su
+# run-as com.untrusted /data/data/com.untrusted/a.out
 u:r:runas_app:s0:c33,c257,c512,c768</code></pre>
 
 
