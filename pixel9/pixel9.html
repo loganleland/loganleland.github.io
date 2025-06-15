@@ -679,6 +679,36 @@ int main() {
 u:object_r:gpu_device:s0 /dev/mali0
         </code></pre>
 
+      <p>Code snippet to get current context</p>
+        <pre data-language="c"><code>
+#include "stdio.h"
+#include "selinux/selinux.h"
+#include "stdlib.h"
+
+int main(void) {
+  //check if selinux enabled
+  if (is_selinux_enabled() != 1) {
+    printf("selinux not enabled\n");
+    return 0;
+  }
+  char *ctx = NULL;
+  if (getcon(&ctx) == 0 && ctx) {
+    printf("%s\n", ctx);
+    freecon(ctx);
+  }
+  return 0;
+}</code></pre>
+
+      <p>Compile and execute:</p>
+        <pre data-language="bash"><code>
+~ $ clang main.c -lselinux
+~ $ ./a.out
+u:r:untrusted_app_27:s0:c32,c257,c512,c768
+~ $ su
+:/data/data/com.termux/files/home # run-as com.untrusted /data/data/com.untrusted/a.out
+u:r:runas_app:s0:c33,c257,c512,c768</code></pre>
+
+
       <p>These rules can be reviewed to help understand the overall system and answer important questions such as: what can I do with an untrusted context?</p>
 
       <p>SELinux rules are stored in a policy file on pixel9 is located <font color="##54ffb2">/sys/fs/selinux/policy</font> and can be parsed with sesearch. I have dockerized sesearch <a href="https://github.com/loganleland/containers/tree/main/sesearch">here</a>.</p>
@@ -1981,8 +2011,6 @@ simulation.on("tick", () => {
 });
 }
 </script>
-
-
 
       </div>
     </article>
