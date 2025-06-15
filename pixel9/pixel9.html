@@ -635,7 +635,7 @@ Finished. Total time: 0.442s
           </ul>
         </details>
 
-        <p>There are 369 results in DevFS. To help narrow focus find which are directly and indirectly assessible from an unprivileged context.</p>
+        <p>There are 369 results in DevFS. To help narrow focus find which are directly and indirectly assessible from an untrusted context.</p>
         <p>To find directly assessible character devices try to open each device then write to stdout if successful.</p>
         <pre><code data-language="c">
 #include "stdio.h"
@@ -651,10 +651,10 @@ int main() {
 }
         </code></pre>
 
-      <p>Out of the 369 character devices in DevFS only 12 can be directly opened from an unprivileged context</p>
+      <p>Out of the 369 character devices in DevFS only 12 can be directly opened from an untrusted context</p>
 
         <details>
-        <summary>Directly openable character devices in DevFS from unprivileged context</summary>
+        <summary>Directly openable character devices in DevFS from untrusted context</summary>
           <ul>
           <li>/dev/ashmem</li>
           <li>/dev/ashmema89909c8-c70e-430d-8521-dfc7ad14edb7</li>
@@ -1583,6 +1583,29 @@ simulation.on("tick", () => {
     <h2 id="untrusted-allow">Untrusted Context</h2>
 
       <p>Applications have untrusted_app context by default, making <font color="#54ffb2">untrusted_app</font> and <font color="#54ffb2">untrusted_app_all</font> highly valuable to review to prioritize time.</p>
+
+      <p><a href="https://android.googlesource.com/platform/system/core.git/+/refs/heads/android15-qpr1-release/run-as/">run-as</a> in conjection with a debuggable apk is a convenient way to iteratively execute code in an untrusted context.</p>
+      <p>
+      <ul>
+          <li>Debug enabled apk: <a href="./app-debug.apk">app-debug.apk</a>
+      </ul>
+
+      <p><font color="#54ffb2">1.</font> Install apk (laptop): 
+      <pre data-language="bash"><code>
+leland@rising pixel9 % adb install app-debug.apk
+Performing Streamed Install
+Success</code></pre></p>
+      <p><font color="#54ffb2">2.</font> Prep (on pixel):<p>
+      <pre data-language="bash"><code>
+# cp a.out /data/data/com.untrusted
+# pkg_uid=$(stat -c %u /data/data/com.untrusted)
+# chown $pkg_uid:$pkg_uid /data/data/com.untrusted/a.out
+# chmod 700 /data/data/com.untrusted/a.out</code></pre></p>
+ 
+    <p><font color="#54ffb2">3.</font> execute from untrusted context:
+      <pre data-language="bash"><code>
+# run-as com.untrusted /data/data/com.untrusted/a.out</code></pre></p>
+ 
 
     <h3>Untrusted Allow Rules</h3>
 
