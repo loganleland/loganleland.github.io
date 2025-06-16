@@ -137,7 +137,7 @@
         <ul>
           <li> Settings -> About Phone</li>
           <li> Scroll to bottom </li>
-          <li> At the time of writing my pixel 9's build number is: <b>BP1A.250505.005</b> </li>
+          <li> At the time of writing my pixel 9's build number is: <b>BP1A.250505.005</b>. Confirmed that the rooting section works with <b>BP2A.250605.031.A2 (june 2025)<b>.</li>
         </ul>
         <div class="callout">
           <p>Recording an incorrect build number can brick your device</p>
@@ -713,9 +713,10 @@ u:r:runas_app:s0:c33,c257,c512,c768</code></pre>
 
       <p>SELinux rules are stored in a policy file on pixel9 is located <font color="##54ffb2">/sys/fs/selinux/policy</font> and can be parsed with sesearch. I have dockerized sesearch <a href="https://github.com/loganleland/containers/tree/main/sesearch">here</a>.</p>
        <ul>
-        <li>allow and allowxperm rules: <a href="./policy">policy</a></li>
-        <li>allow and allowxperm rules (character device file): <a href="./policy_allow_chr_file">policy</a></li>
-        <li>allow and allowxperm rules (character device file and untrusted context): <a href="./untrusted_allow_chr_file">policy</a></li>
+        <li>BP1A.250505.005</li>
+        <li>allow and allowxperm rules: <a href="./policy.BP1A.250505.005">policy</a></li>
+        <li>allow and allowxperm rules (character device file): <a href="./policy_allow_chr_file.BP1A.250505.005">policy</a></li>
+        <li>allow and allowxperm rules (character device file and untrusted context): <a href="./untrusted_allow_chr_file.BP1A.250505.005">policy</a></li>
        </ul>
 
         <h3 id="character-device-context">Character device contexts</h3>
@@ -1471,7 +1472,7 @@ u:r:runas_app:s0:c33,c257,c512,c768</code></pre>
             </ul>
           </details>
 
-    <h2 id="all-allow">Graph of all allow rules</h2>
+    <h2 id="all-allow">Graph of all allow rules: BP1A.250505.005, May 2025</h2>
     <h3>Clusters of outgoing edges:</h3>
       <ul>
         <li>init: 454 outgoing edges</li>
@@ -1630,7 +1631,7 @@ Success</code></pre></p>
 # run-as com.untrusted /data/data/com.untrusted/a.out</code></pre></p>
  
 
-    <h3>Untrusted Allow Rules</h3>
+    <h3>Untrusted Allow Rules: BP1A.250505.005, May 2025</h3>
 
     <p>Red edges are an open rule while green edges represent I/O</p>
 
@@ -1758,7 +1759,7 @@ simulation.on("tick", () => {
 </script>
 
 
-      <h3>edgetpu_device and gxp_device allow open</h3>
+      <h3>edgetpu_device and gxp_device allow open: BP1A.250505.005, May 2025</h3>
 
       <p> Each directed edge represents an open allow rule. edgetpu_device and gxp_device can be I/O'd from an untrusted context but not directly opened.</p>
 
@@ -1887,7 +1888,7 @@ simulation.on("tick", () => {
 }
 </script>
 
-      <h3>usb_device and usbaccessory_device allow open</h3>
+      <h3>usb_device and usbaccessory_device allow open: BP1A.250505.005, May 2025</h3>
 
       <p>Each directed edge represents an open allow rule. usb_device and usbaccessory_device can be I/O'd from an untrusted context but not directly opened.</p>
 
