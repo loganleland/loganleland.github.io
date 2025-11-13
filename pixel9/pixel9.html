@@ -258,7 +258,7 @@ Finished. Total time: 0.442s
 
         <h2 id="direct-drivers">Direct Enumeration</h2>
         <p> To list character devices (root required):</p>
-        <pre data-language="bash"><code># find / -type c 2>/dev/null | sort</code></pre>
+        <pre data-language="bash"><code># cat /proc/devices</code></pre>
 
       <h2 id="selinux-drivers">SELinux Enumeration</h2>
       <p>SELinux (Security-Enhanced Linux) is a mandatory access control. SELinux specifies rules of how different context can interact. Multiple files can be in a single context. Each file contains context information in xattr.</p>
